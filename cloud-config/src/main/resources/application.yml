@@ -1,0 +1,28 @@
+server:
+  port: 8502
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://127.0.0.1:8501/eureka
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: ALWAYS
+
+
+spring:
+  application:
+    name: config-server
+  cloud:
+    config:
+      label: master
+      server:
+        git:
+          uri: https://github.com/liusy456/config-server.git
+          username: liusy456
+          password: lsy417937
+          basedir: /colossus/

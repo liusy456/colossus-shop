@@ -1,0 +1,485 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.colossus.common.dao.TransactionMessageMapper">
+  <resultMap id="BaseResultMap" type="com.colossus.common.model.TransactionMessage">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="version" jdbcType="INTEGER" property="version" />
+    <result column="editor" jdbcType="VARCHAR" property="editor" />
+    <result column="creater" jdbcType="VARCHAR" property="creater" />
+    <result column="edit_time" jdbcType="TIMESTAMP" property="editTime" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="message_id" jdbcType="VARCHAR" property="messageId" />
+    <result column="message_data_type" jdbcType="VARCHAR" property="messageDataType" />
+    <result column="consumer_queue" jdbcType="VARCHAR" property="consumerQueue" />
+    <result column="message_send_times" jdbcType="SMALLINT" property="messageSendTimes" />
+    <result column="areadly_dead" jdbcType="VARCHAR" property="areadlyDead" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="field1" jdbcType="VARCHAR" property="field1" />
+    <result column="field2" jdbcType="VARCHAR" property="field2" />
+    <result column="field3" jdbcType="VARCHAR" property="field3" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.colossus.common.model.TransactionMessage">
+    <result column="message_body" jdbcType="LONGVARCHAR" property="messageBody" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, version, editor, creater, edit_time, create_time, message_id, message_data_type, 
+    consumer_queue, message_send_times, areadly_dead, status, remark, field1, field2, 
+    field3, update_time
+  </sql>
+  <sql id="Blob_Column_List">
+    message_body
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.colossus.common.model.TransactionMessageExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from transaction_message
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.colossus.common.model.TransactionMessageExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from transaction_message
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from transaction_message
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from transaction_message
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.colossus.common.model.TransactionMessageExample">
+    delete from transaction_message
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.colossus.common.model.TransactionMessage">
+    insert into transaction_message (id, version, editor, 
+      creater, edit_time, create_time, 
+      message_id, message_data_type, consumer_queue, 
+      message_send_times, areadly_dead, status, 
+      remark, field1, field2, 
+      field3, update_time, message_body
+      )
+    values (#{id,jdbcType=VARCHAR}, #{version,jdbcType=INTEGER}, #{editor,jdbcType=VARCHAR}, 
+      #{creater,jdbcType=VARCHAR}, #{editTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{messageId,jdbcType=VARCHAR}, #{messageDataType,jdbcType=VARCHAR}, #{consumerQueue,jdbcType=VARCHAR}, 
+      #{messageSendTimes,jdbcType=SMALLINT}, #{areadlyDead,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR}, #{field1,jdbcType=VARCHAR}, #{field2,jdbcType=VARCHAR}, 
+      #{field3,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, #{messageBody,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.colossus.common.model.TransactionMessage">
+    insert into transaction_message
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="version != null">
+        version,
+      </if>
+      <if test="editor != null">
+        editor,
+      </if>
+      <if test="creater != null">
+        creater,
+      </if>
+      <if test="editTime != null">
+        edit_time,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="messageId != null">
+        message_id,
+      </if>
+      <if test="messageDataType != null">
+        message_data_type,
+      </if>
+      <if test="consumerQueue != null">
+        consumer_queue,
+      </if>
+      <if test="messageSendTimes != null">
+        message_send_times,
+      </if>
+      <if test="areadlyDead != null">
+        areadly_dead,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="field1 != null">
+        field1,
+      </if>
+      <if test="field2 != null">
+        field2,
+      </if>
+      <if test="field3 != null">
+        field3,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="messageBody != null">
+        message_body,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null">
+        #{version,jdbcType=INTEGER},
+      </if>
+      <if test="editor != null">
+        #{editor,jdbcType=VARCHAR},
+      </if>
+      <if test="creater != null">
+        #{creater,jdbcType=VARCHAR},
+      </if>
+      <if test="editTime != null">
+        #{editTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="messageId != null">
+        #{messageId,jdbcType=VARCHAR},
+      </if>
+      <if test="messageDataType != null">
+        #{messageDataType,jdbcType=VARCHAR},
+      </if>
+      <if test="consumerQueue != null">
+        #{consumerQueue,jdbcType=VARCHAR},
+      </if>
+      <if test="messageSendTimes != null">
+        #{messageSendTimes,jdbcType=SMALLINT},
+      </if>
+      <if test="areadlyDead != null">
+        #{areadlyDead,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="field1 != null">
+        #{field1,jdbcType=VARCHAR},
+      </if>
+      <if test="field2 != null">
+        #{field2,jdbcType=VARCHAR},
+      </if>
+      <if test="field3 != null">
+        #{field3,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="messageBody != null">
+        #{messageBody,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.colossus.common.model.TransactionMessageExample" resultType="java.lang.Long">
+    select count(*) from transaction_message
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update transaction_message
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.version != null">
+        version = #{record.version,jdbcType=INTEGER},
+      </if>
+      <if test="record.editor != null">
+        editor = #{record.editor,jdbcType=VARCHAR},
+      </if>
+      <if test="record.creater != null">
+        creater = #{record.creater,jdbcType=VARCHAR},
+      </if>
+      <if test="record.editTime != null">
+        edit_time = #{record.editTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.messageId != null">
+        message_id = #{record.messageId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.messageDataType != null">
+        message_data_type = #{record.messageDataType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.consumerQueue != null">
+        consumer_queue = #{record.consumerQueue,jdbcType=VARCHAR},
+      </if>
+      <if test="record.messageSendTimes != null">
+        message_send_times = #{record.messageSendTimes,jdbcType=SMALLINT},
+      </if>
+      <if test="record.areadlyDead != null">
+        areadly_dead = #{record.areadlyDead,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark != null">
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.field1 != null">
+        field1 = #{record.field1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.field2 != null">
+        field2 = #{record.field2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.field3 != null">
+        field3 = #{record.field3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateTime != null">
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.messageBody != null">
+        message_body = #{record.messageBody,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update transaction_message
+    set id = #{record.id,jdbcType=VARCHAR},
+      version = #{record.version,jdbcType=INTEGER},
+      editor = #{record.editor,jdbcType=VARCHAR},
+      creater = #{record.creater,jdbcType=VARCHAR},
+      edit_time = #{record.editTime,jdbcType=TIMESTAMP},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      message_id = #{record.messageId,jdbcType=VARCHAR},
+      message_data_type = #{record.messageDataType,jdbcType=VARCHAR},
+      consumer_queue = #{record.consumerQueue,jdbcType=VARCHAR},
+      message_send_times = #{record.messageSendTimes,jdbcType=SMALLINT},
+      areadly_dead = #{record.areadlyDead,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=VARCHAR},
+      remark = #{record.remark,jdbcType=VARCHAR},
+      field1 = #{record.field1,jdbcType=VARCHAR},
+      field2 = #{record.field2,jdbcType=VARCHAR},
+      field3 = #{record.field3,jdbcType=VARCHAR},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      message_body = #{record.messageBody,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update transaction_message
+    set id = #{record.id,jdbcType=VARCHAR},
+      version = #{record.version,jdbcType=INTEGER},
+      editor = #{record.editor,jdbcType=VARCHAR},
+      creater = #{record.creater,jdbcType=VARCHAR},
+      edit_time = #{record.editTime,jdbcType=TIMESTAMP},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      message_id = #{record.messageId,jdbcType=VARCHAR},
+      message_data_type = #{record.messageDataType,jdbcType=VARCHAR},
+      consumer_queue = #{record.consumerQueue,jdbcType=VARCHAR},
+      message_send_times = #{record.messageSendTimes,jdbcType=SMALLINT},
+      areadly_dead = #{record.areadlyDead,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=VARCHAR},
+      remark = #{record.remark,jdbcType=VARCHAR},
+      field1 = #{record.field1,jdbcType=VARCHAR},
+      field2 = #{record.field2,jdbcType=VARCHAR},
+      field3 = #{record.field3,jdbcType=VARCHAR},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.colossus.common.model.TransactionMessage">
+    update transaction_message
+    <set>
+      <if test="version != null">
+        version = #{version,jdbcType=INTEGER},
+      </if>
+      <if test="editor != null">
+        editor = #{editor,jdbcType=VARCHAR},
+      </if>
+      <if test="creater != null">
+        creater = #{creater,jdbcType=VARCHAR},
+      </if>
+      <if test="editTime != null">
+        edit_time = #{editTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="messageId != null">
+        message_id = #{messageId,jdbcType=VARCHAR},
+      </if>
+      <if test="messageDataType != null">
+        message_data_type = #{messageDataType,jdbcType=VARCHAR},
+      </if>
+      <if test="consumerQueue != null">
+        consumer_queue = #{consumerQueue,jdbcType=VARCHAR},
+      </if>
+      <if test="messageSendTimes != null">
+        message_send_times = #{messageSendTimes,jdbcType=SMALLINT},
+      </if>
+      <if test="areadlyDead != null">
+        areadly_dead = #{areadlyDead,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="field1 != null">
+        field1 = #{field1,jdbcType=VARCHAR},
+      </if>
+      <if test="field2 != null">
+        field2 = #{field2,jdbcType=VARCHAR},
+      </if>
+      <if test="field3 != null">
+        field3 = #{field3,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="messageBody != null">
+        message_body = #{messageBody,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.colossus.common.model.TransactionMessage">
+    update transaction_message
+    set version = #{version,jdbcType=INTEGER},
+      editor = #{editor,jdbcType=VARCHAR},
+      creater = #{creater,jdbcType=VARCHAR},
+      edit_time = #{editTime,jdbcType=TIMESTAMP},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      message_id = #{messageId,jdbcType=VARCHAR},
+      message_data_type = #{messageDataType,jdbcType=VARCHAR},
+      consumer_queue = #{consumerQueue,jdbcType=VARCHAR},
+      message_send_times = #{messageSendTimes,jdbcType=SMALLINT},
+      areadly_dead = #{areadlyDead,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      field1 = #{field1,jdbcType=VARCHAR},
+      field2 = #{field2,jdbcType=VARCHAR},
+      field3 = #{field3,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      message_body = #{messageBody,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.colossus.common.model.TransactionMessage">
+    update transaction_message
+    set version = #{version,jdbcType=INTEGER},
+      editor = #{editor,jdbcType=VARCHAR},
+      creater = #{creater,jdbcType=VARCHAR},
+      edit_time = #{editTime,jdbcType=TIMESTAMP},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      message_id = #{messageId,jdbcType=VARCHAR},
+      message_data_type = #{messageDataType,jdbcType=VARCHAR},
+      consumer_queue = #{consumerQueue,jdbcType=VARCHAR},
+      message_send_times = #{messageSendTimes,jdbcType=SMALLINT},
+      areadly_dead = #{areadlyDead,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      field1 = #{field1,jdbcType=VARCHAR},
+      field2 = #{field2,jdbcType=VARCHAR},
+      field3 = #{field3,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+</mapper>

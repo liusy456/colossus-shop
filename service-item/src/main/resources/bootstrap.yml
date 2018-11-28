@@ -1,0 +1,7 @@
+spring:
+  cloud:
+    config:
+      allow-override: true
+      name: service-item
+      profile: dev
+      uri: http://localhost:8502/
