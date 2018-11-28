@@ -1,24 +1,12 @@
-<<<<<<< HEAD
-# colossus-shop
-基于spring-cloud的分布式商城项目
-=======
-
-
 ## colossus-shop
 
-模仿国内知名B2C网站,实现的一个分布式B2C商城
-
-[参考项目github地址](https://github.com/xubinux/xbin-store-cloud)
+基于spring-cloud的分布式商城项目，现在只实现了框架的搭建，具体的
+业务逻辑还未开始，本人上班又比较忙，希望大家可以一起来共同完成这个项目，也是学习微服务的
+好机会。。。
+谢谢大家
 
 ### 涉及技术
-* Spring Cloud Hystrix
-* Spring Cloud Turbine
-* Spring Cloud Eureka
-* Spring Cloud Sleuth
-* Spring Cloud Config
-* Spring Cloud Feign
-* Spring Cloud Zuul
-* Spring Cloud Bus
+* Spring Cloud
 * Spring Boot Admin
 * Spring Boot
 * RabbitMQ
@@ -28,8 +16,6 @@
 * MySQL
 * Redis
 * ElasticSearch
-* MyBatis
-* ZipKin
 * Docker
 * FastDFS
 * Freemarker
@@ -96,14 +82,3 @@
 | apollo-adminservice   	|8508 |
 
 
-### 实现目标
-
-本项目最终实现的目标 [点我查看最后完成效果](https://www.jd.com)
-
-
-
-
-
-
-
->>>>>>> 304803172958dc74235743624b22c3d2be9798d5
