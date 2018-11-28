@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: cloud-admin
+server:
+  port: 8505
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://127.0.0.1:8501/eureka/
+  instance:
+    hostname: ${hostname:admin}
+    prefer-ip-address: true
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: ALWAYS

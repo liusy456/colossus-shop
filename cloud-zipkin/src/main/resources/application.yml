@@ -1,0 +1,19 @@
+server:
+  port: 8507
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: ALWAYS
+
+spring:
+  application:
+    # This ends up as the service name in zipkin
+    name: zipkin-server
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://127.0.0.1:8501/eureka/
