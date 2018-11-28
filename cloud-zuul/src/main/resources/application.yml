@@ -5,9 +5,9 @@ spring:
     sampler:
       probability: 1.0
   zipkin:
-    base-url: http://localhost:8507/
+    base-url: http://localhost:8504/
 server:
-  port: 8054
+  port: 8505
 management:
   endpoints:
     web:

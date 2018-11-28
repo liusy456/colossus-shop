@@ -2,7 +2,7 @@ spring:
   application:
     name: cloud-admin
 server:
-  port: 8505
+  port: 8503
 
 eureka:
   client:

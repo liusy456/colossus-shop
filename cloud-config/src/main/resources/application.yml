@@ -23,6 +23,6 @@ spring:
       server:
         git:
           uri: https://github.com/liusy456/config-server.git
-          username: liusy456
-          password: lsy417937
+          username: #*****
+          password: #*****
           basedir: /colossus/
