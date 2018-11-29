@@ -1,0 +1,40 @@
+{
+  "@class" : "org.apereo.cas.services.RegexRegisteredService",
+  "serviceId" : "^(https|imaps|http)://([\\s\\S]*?)/([\\s\\S]*?manager[\\s\\S]*?).*",
+  "name" : "manager server",
+  "id" : 100001,
+  "description" : "认证天称星管理端",
+  "evaluationOrder" : 10002,
+  "attributeReleasePolicy": {
+    "@class": "org.apereo.cas.services.ReturnAllowedAttributeReleasePolicy",
+    "allowedAttributes": ["java.util.ArrayList", ["id", "email", "phone","org_id","orgId"]]
+  },
+  "properties" : {
+    "@class" : "java.util.HashMap",
+    "jwtSigningSecret" : {
+      "@class" : "org.apereo.cas.services.DefaultRegisteredServiceProperty",
+      "values" : [ "java.util.HashSet", [ "nWn2IW9JGLmjmYFO2w6ByMWUuxM1RGgxUmDd0HKWcVmkid0xeX5GodiHIPnmVJttxAFu75FHf2AWsqkiOxJjGMQxyOFG1sF1swbvORe4E5YxNSZE1u3xr0uRFvHabZAFilVobUFcKjwrPjdZimQ6onvzz20ao2Lsq9ULophfFjvAplQ8wqZWYWACoJizKscgfPp5Zb0KTcD9Bm81JOJPLjjiVAXyYQZyImilDabnBB5cQV1Kb8a6W76wj26waVxS" ] ]
+    },
+    "jwtEncryptionSecret" : {
+      "@class" : "org.apereo.cas.services.DefaultRegisteredServiceProperty",
+      "values" : [ "java.util.HashSet", [ "l05zdyGRLPIPrSrA8Z3xXwSKrJHhPNQ0oJJ1ly1JAnPk8Tky" ] ]
+    },
+    "jwtSigningSecretAlg" : {
+      "@class" : "org.apereo.cas.services.DefaultRegisteredServiceProperty",
+      "values" : [ "java.util.HashSet", [ "HS512" ] ]
+    },
+    "jwtEncryptionSecretAlg" : {
+      "@class" : "org.apereo.cas.services.DefaultRegisteredServiceProperty",
+      "values" : [ "java.util.HashSet", [ "dir" ] ]
+    },
+    "jwtEncryptionSecretMethod" : {
+      "@class" : "org.apereo.cas.services.DefaultRegisteredServiceProperty",
+      "values" : [ "java.util.HashSet", [ "A128CBC-HS256" ] ]
+    }
+  },
+  "logoutType" : "BACK_CHANNEL",
+  "multifactorPolicy" : {
+    "@class" : "org.apereo.cas.services.DefaultRegisteredServiceMultifactorPolicy",
+    "multifactorAuthenticationProviders" : [ "java.util.LinkedHashSet", [ "mfa-custom" ] ]
+  }
+}

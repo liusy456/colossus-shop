@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layout">
+
+<head>
+    <title th:text="#{cas.mfa.authy.pagetitle}"></title>
+    <link rel="stylesheet" th:href="@{/css/normalize.css}">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/swiper-3.4.2.min.css}">
+    <link rel="stylesheet" th:href="@{/css/plugins/iCheck/skins/flat/blue.css}">
+    <link rel="stylesheet" th:href="@{/css/login.css?ts=201809071705}">
+</head>
+
+<body>
+    <div layout:fragment="content" class="login_container">
+        <div class="login_content" id="login">
+            <div class="login_wrapper">
+                <a href="https://www.tembin.com/" target="_blank">
+                <img th:src="@{/images/login_logo.png}" class="login_logo" alt="login_logo">
+                </a>
+                <div class="login_cont">
+                    <div class="login_info">
+                        <form class="login_tabs" method="post" id="fm1" th:object="${credential}">
+                            <div id="msg" class="error_hint" th:if="${not #lists.isEmpty(#fields.errors('*'))}">
+                                <div class="error_hint_info">
+                                    <i class="error_warning"></i><span id="err" th:each="err : ${#fields.errors('*')}" th:utext="${err}"
+                                    />
+                                </div>
+                            </div>
+                            <div class="login_input required">
+                                <div class="login_icon user_icon"></div>
+                                <input style="background-color: transparent;transition: background-color 5000s ease-in-out 0s;" type="password" class="required"
+                                    id="token" size="25" tabindex="1" th:field="*{token}" th:accesskey="#{screen.welcome.label.password.accesskey}"
+                                    autocomplete="off" placeholder="请输入验证码" />
+                                <input style="background-color: transparent;transition: background-color 5000s ease-in-out 0s;" type="hidden" id="phone"
+                                    size="25" tabindex="1" name="phone" th:accesskey="#{screen.welcome.label.password.accesskey}"
+                                    autocomplete="off" th:value="${phone}" />
+                            </div>
+                            <div class="login_button_y">
+                                <input id="code" class="btn-submit next_btn login_btn" value="发送验证码" type="button" th:name="${phone}" />
+                            </div>
+                            <div class="login_button">
+                                <input class="btn-submit next_btn login_btn" name="_eventId_submit" accesskey="l" th:value="#{screen.welcome.button.login}"
+                                    tabindex="4" type="submit" />
+                            </div>
+                            <div class="row btn-row">
+                                <input type="hidden" name="execution" th:value="${flowExecutionKey}" />
+                                <input type="hidden" name="geolocation" />
+                                <span></span>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="login_carousel">
+                        <div class="swiper-container carousel1">
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide">
+                                    <img th:src="@{/images/carousel1.png?ts=201808221154}" alt="">
+                                </div>
+                                <div class="swiper-slide">
+                                    <img th:src="@{/images/carousel2.png?ts=201808221154}" alt="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <script type="text/javascript" th:inline="javascript" th:src="@{/js/jquery-2.1.1.js}"></script>
+            <script type="text/javascript" src="js/swiper.min.js"></script>
+            <script>
+                
+                $(document).ready(function () {
+                    $("#code").attr('disabled', true);
+                    sendCode()
+                    function resizeFun(){
+                        // if(document.documentElement.clientWidth <= 1320){
+                        //     $(".login_wrapper .login_cont").addClass("position-flex");
+                        // }
+
+                        if(document.documentElement.clientHeight < 760) {
+                                $("footer").css({
+                                    'position': 'static'
+                                })
+                                $(".login_content").css({
+                                    'padding':'20px 0 40px'
+                                })
+                                $(".login_logo").css({
+                                    'margin-bottom':'40px'
+                                })
+                            }else{
+                                $("footer").css({
+                                    'position': 'absolute'
+                                })
+                                $(".login_content").css({
+                                    'padding': '6% 0 0 0'
+                                })
+                                $(".login_logo").css({
+                                    'margin-bottom':'60px'
+                                })
+                            }
+                    }
+                    resizeFun();
+                    window.addEventListener('resize',function(){
+                        resizeFun()
+                    })
+                    var mySwiper = new Swiper('.carousel1', {
+                        paginationClickable: true,
+                        autoplay: 3000,  //自动播放时间
+                        autoplayDisableOnInteraction: false, //自动切换不会停止
+                        loop: true,
+                    })
+                });
+                $('#code').on('click', function () {
+                    var phone=$("#code").attr('name')
+                    $("#code").attr('disabled', true);
+                    sendCode();
+                    $.ajax({
+                        url:"send-captcha",
+                        type:"post",
+                        dataType: "json",
+                        data:{phone:phone},
+                        error:function (result) {
+                            $('#msg').attr("hidden",false)
+                            $('#err').text("发送验证码失败，请稍候重新发送.")
+                            //alert(result.messages)
+                        }
+                    });
+                });
+                $(".login_input").on('change','input',function(){
+                    if($(this).val()){
+                        $(this).prev().addClass("active-icon")
+                    }else{
+                        $(this).prev().removeClass("active-icon")
+                    }
+                })
+                function sendCode(timer) {
+                    if (!timer) {
+                        var count = 60;
+                        timer = setInterval(function () {
+                            if (count > 1 && count <= 60) {
+                                count--;
+                                var minu = Math.floor(count / 60);
+                                var sec = count % 60;
+                                var result = '';
+                                result = sec + "秒";
+                                $("#code").attr('value', result + "后重新获取")
+                                $("#code").attr('disabled', true)                                
+                            } else {
+                                $("#code").attr('value', "再次发送验证码")
+                                $("#code").attr('disabled', false)
+                                clearInterval(timer);
+                                timer = null;
+                            }
+                        }, 1000)
+                    }
+                }
+            </script>
+            <div th:replace="fragments/footer" />
+        </div>
+    </div>
+    
+</body>
+</html>
