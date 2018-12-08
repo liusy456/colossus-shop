@@ -41,6 +41,7 @@
         <module>service-pay-client</module>
         <module>colossus-shiro</module>
         <module>service-sso</module>
+        <module>colossus-auth</module>
     </modules>
     <name>colossus-shop</name>
     <version>1.0-SNAPSHOT</version>

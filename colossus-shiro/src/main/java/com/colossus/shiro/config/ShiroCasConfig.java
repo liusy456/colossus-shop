@@ -57,9 +57,9 @@ import static com.nimbusds.jose.JWSAlgorithm.HS512;
 public class ShiroCasConfig {
 
 
-    @Value("${jwt.signingSecret}")
+    @Value("${spring.jwt.signingSecret}")
     private String signingSecret;
-    @Value("${jwt.encryptionSecret}")
+    @Value("${spring.jwt.encryptionSecret}")
     private String encryptionSecret;
 
     @Bean
