@@ -2,8 +2,8 @@ package com.colossus.shiro.config;
 
 import com.colossus.shiro.*;
 import com.google.common.collect.Lists;
-import com.tembin.member.client.api.AuthTokenApi;
-import com.tembin.member.client.api.UserApi;
+import com.nimbusds.jose.EncryptionMethod;
+import com.nimbusds.jose.JWEAlgorithm;
 import io.buji.pac4j.filter.CallbackFilter;
 import io.buji.pac4j.filter.LogoutFilter;
 import io.buji.pac4j.filter.SecurityFilter;
@@ -25,15 +25,21 @@ import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.apache.shiro.web.servlet.Cookie;
 import org.apache.shiro.web.servlet.SimpleCookie;
 import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
+import org.pac4j.cas.client.CasClient;
+import org.pac4j.cas.client.rest.CasRestFormClient;
 import org.pac4j.cas.config.CasConfiguration;
 import org.pac4j.cas.config.CasProtocol;
 import org.pac4j.core.client.Clients;
 import org.pac4j.core.config.Config;
 import org.pac4j.core.context.session.J2ESessionStore;
+import org.pac4j.http.client.direct.HeaderClient;
+import org.pac4j.jwt.config.encryption.SecretEncryptionConfiguration;
+import org.pac4j.jwt.config.signature.SecretSignatureConfiguration;
+import org.pac4j.jwt.credentials.authenticator.JwtAuthenticator;
+import org.pac4j.jwt.profile.JwtGenerator;
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -45,9 +51,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static com.nimbusds.jose.JWSAlgorithm.HS512;
+
 @Configuration
 public class ShiroCasConfig {
 
+
+    @Value("${jwt.signingSecret}")
+    private String signingSecret;
+    @Value("${jwt.encryptionSecret}")
+    private String encryptionSecret;
 
     @Bean
     public FilterRegistrationBean filterRegistrationBean() {
@@ -60,10 +73,11 @@ public class ShiroCasConfig {
         filterRegistration.setOrder(1);
         return filterRegistration;
     }
+
     @Bean
     public List<AuthorizingRealm> normalRealm() {
-        List<AuthorizingRealm> result= Lists.newArrayList();
-        Pac4jRealm realm= new Pac4jRealm();
+        List<AuthorizingRealm> result = Lists.newArrayList();
+        Pac4jRealm realm = new Pac4jRealm();
         realm.setPrincipalNameAttribute("casPac4jPrincipal");
 //        realm.setCachingEnabled(true);
 //        realm.setAuthorizationCachingEnabled(true);
@@ -75,55 +89,64 @@ public class ShiroCasConfig {
 
 
     @Bean
-    @ConditionalOnMissingBean
-    public CustomFormExtractor customFormExtractor(CasConfiguration casConfiguration,
-                                                   AuthTokenApi authTokenApi,
-                                                   UserApi userApi){
-        CustomFormExtractor customFormExtractor=new CustomFormExtractor("phoneNumber","passwd","casRestClient");
-        customFormExtractor.setConfiguration(casConfiguration);
-        customFormExtractor.setAuthTokenApi(authTokenApi);
-        customFormExtractor.setUserApi(userApi);
-        return customFormExtractor;
-    }
-
-    @Bean
-    public CasConfiguration casConfiguration( @Value("${spring.cas.prefix_url}")String prefixUrl,
-                                              @Value("${spring.cas.login_url}")String casLoginUrl,
-                                              RedisCache cache,
-                                              DefaultWebSessionManager sessionManager){
+    public CasConfiguration casConfiguration(@Value("${spring.cas.prefix_url}") String prefixUrl,
+                                             @Value("${spring.cas.login_url}") String casLoginUrl,
+                                             RedisCache cache,
+                                             DefaultWebSessionManager sessionManager) {
         CasConfiguration casConfiguration = new CasConfiguration(casLoginUrl);
         casConfiguration.setProtocol(CasProtocol.CAS30);
         casConfiguration.setPrefixUrl(prefixUrl);
-        casConfiguration.setLogoutHandler(defaultCasLogoutHandler(cache,sessionManager));
+        casConfiguration.setLogoutHandler(defaultCasLogoutHandler(cache, sessionManager));
         return casConfiguration;
     }
+
     /**
      * 通过rest接口可以获取tgt，获取service ticket，甚至可以获取CasProfile
+     *
      * @return
      */
-
     @Bean
-    public CustomRestClient casRestFormClient(CasConfiguration casConfiguration, CustomFormExtractor customFormExtractor) {
+    public CasRestFormClient casRestFormClient(CasConfiguration casConfiguration) {
 
-        CustomRestClient casRestFormClient = new CustomRestClient();
+        CasRestFormClient casRestFormClient = new CasRestFormClient();
         casRestFormClient.setConfiguration(casConfiguration);
         casRestFormClient.setName("casRestClient");
-        casRestFormClient.setCredentialsExtractor(customFormExtractor);
+        //casRestFormClient.setCredentialsExtractor(customFormExtractor);
         return casRestFormClient;
     }
 
-
+    @Bean
+    public JwtAuthenticator jwtAuthenticator() {
+        JwtAuthenticator jwtAuthenticator = new JwtAuthenticator();
+        jwtAuthenticator.addSignatureConfiguration(new SecretSignatureConfiguration(signingSecret, HS512));
+        jwtAuthenticator.addEncryptionConfiguration(new SecretEncryptionConfiguration(encryptionSecret, JWEAlgorithm.DIR, EncryptionMethod.A128CBC_HS256));
+        return jwtAuthenticator;
+    }
 
     @Bean
-    public Clients clients(CustomRestClient customRestClient, CustomCasClient customCasClient) {
+    public JwtGenerator jwtGenerator() {
+        JwtGenerator generator = new org.pac4j.jwt.profile.JwtGenerator();
+        generator.setSignatureConfiguration(new SecretSignatureConfiguration(signingSecret, HS512));
+        generator.setEncryptionConfiguration(new SecretEncryptionConfiguration(encryptionSecret,
+                JWEAlgorithm.DIR, EncryptionMethod.A128CBC_HS256));
+        return generator;
+    }
+
+    @Bean
+    public HeaderClient headerClient() {
+        HeaderClient headerClient = new HeaderClient("token", jwtAuthenticator());
+        headerClient.setName("casJwtClient");
+        return headerClient;
+    }
+
+    @Bean
+    public Clients clients(CasRestFormClient casRestFormClient, CasClient casClient, HeaderClient headerClient) {
         //可以设置默认client
         Clients clients = new Clients();
         //支持的client全部设置进去
-        clients.setClients(customCasClient,customRestClient);
+        clients.setClients(casClient, casRestFormClient, headerClient);
         return clients;
     }
-
-
 
     @Bean
     public Config casConfig(Clients clients) {
@@ -136,23 +159,25 @@ public class ShiroCasConfig {
 
     /**
      * 可rememberMe
+     *
      * @param callbackUrl
      * @return
      */
     @Bean
-    public CustomCasClient casClient(CasConfiguration casConfiguration,
-                                     @Value("${spring.cas.callback_url}")String callbackUrl) {
+    public CasClient casClient(CasConfiguration casConfiguration,
+                               @Value("${spring.cas.callback_url}") String callbackUrl) {
 
-        CustomCasClient casClient = new CustomCasClient();
+        CasClient casClient = new CasClient();
         casClient.setConfiguration(casConfiguration);
         casClient.setCallbackUrl(callbackUrl);
         casClient.setName("casClient");
         return casClient;
     }
 
+
     @Bean
-    public CustomLogoutHandler defaultCasLogoutHandler(RedisCache cache, DefaultWebSessionManager sessionManager){
-        CustomLogoutHandler defaultCasLogoutHandler=new CustomLogoutHandler();
+    public CustomLogoutHandler defaultCasLogoutHandler(RedisCache cache, DefaultWebSessionManager sessionManager) {
+        CustomLogoutHandler defaultCasLogoutHandler = new CustomLogoutHandler();
         defaultCasLogoutHandler.setDestroySession(true);
         defaultCasLogoutHandler.setStore(customCacheStore(cache));
         defaultCasLogoutHandler.setSessionManager(sessionManager);
@@ -164,36 +189,9 @@ public class ShiroCasConfig {
         DefaultShiroFilterChainDefinition definition = new DefaultShiroFilterChainDefinition();
         definition.addPathDefinition("/callback", "callback");
         definition.addPathDefinition("/logout", "logout");
-        //definition.addPathDefinition("/api/auth/**","auth");
-        definition.addPathDefinition("/api/v1/message/getCategoryIcon","anon");
-        definition.addPathDefinition("/api/v1/auth/renewToken","anon");
-        definition.addPathDefinition("/api/v1/user/sendCaptcha","anon");
-        definition.addPathDefinition("/api/v1/user/verifyCaptchaAndGetInvitations","anon");
-        definition.addPathDefinition("/api/v1/user/register","anon");
-        definition.addPathDefinition("/api/v1/user/resetPwd","anon");
-        definition.addPathDefinition("/api/v1/user/sendResetPwdCaptcha","anon");
-        definition.addPathDefinition("/api/v1/user/login", "anon");
-
-        definition.addPathDefinition("/api/v1/user/saveUserPosition","anon");
-        definition.addPathDefinition("/api/v1/android/**","anon");
-        definition.addPathDefinition("/api/v1/app/picture/**","anon");
-        definition.addPathDefinition("/api/v2/ios/check","anon");
-        definition.addPathDefinition("/api/v2/review/helper/**","anon");
-        definition.addPathDefinition("/api/v2/mailgun/**","anon");
-        definition.addPathDefinition("/api/v1/internal/call/**","anon");
-        definition.addPathDefinition("/api/member/*","anon");
+        //微服务接口不做登录认证，只做服务鉴权
         definition.addPathDefinition("/service/**", "anon");
-        definition.addPathDefinition("/alipay/**", "anon");
-
-        definition.addPathDefinition("/error/**","anon");
-        definition.addPathDefinition("/register/**","anon");
-        definition.addPathDefinition("/authcode/**","anon");
-        definition.addPathDefinition("/resource/**","anon");
-        definition.addPathDefinition("/public/**","anon");
-        definition.addPathDefinition("/kamobile/**","anon");
-        definition.addPathDefinition("/tiny-app/*.html","anon");
-        definition.addPathDefinition("/hook/**", "anon");
-        definition.addPathDefinition("/**", "user");
+        definition.addPathDefinition("/**", "auth");
         //definition.addPathDefinition("/api/v1/ebay-call-back/**", "anon");
         return definition;
     }
@@ -211,13 +209,20 @@ public class ShiroCasConfig {
 
     @Bean("shiroRedisCache")
     public RedisCache cache(@Qualifier("redisTemplate")
-                                 RedisTemplate redisTemplate){
-        return new RedisCache("redis_", redisTemplate,1800);
+                                    RedisTemplate redisTemplate) {
+        return new RedisCache("redis_", redisTemplate, 1800);
     }
+
+    /**
+     * 集群部署时logout，采用redis
+     * @param cache
+     * @return
+     */
     @Bean
-    public CustomCacheStore customCacheStore(RedisCache cache){
+    public CustomCacheStore customCacheStore(RedisCache cache) {
         return new CustomCacheStore(cache);
     }
+
     /**
      * 对过滤器进行调整
      *
@@ -227,8 +232,8 @@ public class ShiroCasConfig {
     @Bean("shiroFilter")
     public ShiroFilterFactoryBean shiroFilterFactoryBean(SecurityManager securityManager,
                                                          ShiroFilterChainDefinition shiroFilterChainDefinition,
-                                                         Config config ,
-                                                         @Value("${spring.cas.default_url}")String defaultUrl) {
+                                                         Config config,
+                                                         @Value("${spring.cas.default_url}") String defaultUrl) {
 
         ShiroFilterFactoryBean filterFactoryBean = new ShiroFilterFactoryBean();
 
@@ -241,20 +246,13 @@ public class ShiroCasConfig {
 //
         Map<String, Filter> filters = new HashMap<>();
         SecurityFilter securityFilter = new SecurityFilter();
-        securityFilter.setClients("renewCasClient");
+        securityFilter.setClients("casClient,casRestClient,casJwtClient");
 //isFullyAuthenticated
         //securityFilter.setAuthorizers("isFullyAuthenticated");
 
         securityFilter.setConfig(config);
         //securityFilter.setSecurityLogic(new CustomSecurityLogic());
         filters.put("auth", securityFilter);
-        SecurityFilter customSecurityFilter = new SecurityFilter();
-        customSecurityFilter.setClients("casClient,casRestClient");
-
-        //securityFilter.setAuthorizers("isRemembered");
-        customSecurityFilter.setSecurityLogic(new CustomSecurityLogic());
-        customSecurityFilter.setConfig(config);
-        filters.put("user", customSecurityFilter);
         CallbackFilter callbackFilter = new CallbackFilter();
         callbackFilter.setConfig(config);
         callbackFilter.setDefaultUrl(defaultUrl);
@@ -288,22 +286,23 @@ public class ShiroCasConfig {
         advisorAutoProxyCreator.setProxyTargetClass(true);
         return advisorAutoProxyCreator;
     }
+
     /**
      * RedisSessionDAO shiro sessionDao层的实现 通过redis
      */
     @Bean("shiroRedisSessionDao")
     public RedisSessionDao redisSessionDAO(@Qualifier("redisTemplate")
-                                                       RedisTemplate redisTemplate) {
-        return new RedisSessionDao(redisTemplate,"redis_shiro_session_",1800);
+                                                   RedisTemplate redisTemplate) {
+        return new RedisSessionDao(redisTemplate, "redis_shiro_session_", 1800);
     }
 
     @Bean
-    public SimpleSessionFactory simpleSessionFactory(){
+    public SimpleSessionFactory simpleSessionFactory() {
         return new SimpleSessionFactory();
     }
 
     @Bean("shiroCacheManage")
-    public RedisCacheManager cacheManager(RedisCache redisCache){
+    public RedisCacheManager cacheManager(RedisCache redisCache) {
         return new RedisCacheManager(redisCache);
     }
 
@@ -311,12 +310,12 @@ public class ShiroCasConfig {
      * shiro session的管理
      */
     @Bean
-    public DefaultWebSessionManager SessionManager(@Qualifier("shiroCacheManage") RedisCacheManager cacheManager,@Qualifier("shiroRedisSessionDao") RedisSessionDao redisSessionDao, SimpleSessionFactory simpleSessionFactory, @Value("${server.servlet.context-path}")String contextPath) {
+    public DefaultWebSessionManager SessionManager(@Qualifier("shiroCacheManage") RedisCacheManager cacheManager, @Qualifier("shiroRedisSessionDao") RedisSessionDao redisSessionDao, SimpleSessionFactory simpleSessionFactory, @Value("${server.servlet.context-path}") String contextPath) {
         DefaultWebSessionManager sessionManager = new DefaultWebSessionManager();
         sessionManager.setSessionDAO(redisSessionDao);
-        sessionManager.setGlobalSessionTimeout(1800*1000);
+        sessionManager.setGlobalSessionTimeout(1800 * 1000);
         sessionManager.setCacheManager(cacheManager);
-        Cookie cookie=new SimpleCookie();
+        Cookie cookie = new SimpleCookie();
         cookie.setPath(contextPath);
         cookie.setName("auth-id");
         sessionManager.setDeleteInvalidSessions(true);
@@ -324,14 +323,15 @@ public class ShiroCasConfig {
         sessionManager.setSessionFactory(simpleSessionFactory);
         return sessionManager;
     }
+
     @Bean
-    public SecurityManager securityManager(DefaultWebSessionManager sessionManager, @Qualifier("shiroCacheManage")RedisCacheManager cacheManager, List<AuthorizingRealm> realms) {
+    public SecurityManager securityManager(DefaultWebSessionManager sessionManager, @Qualifier("shiroCacheManage") RedisCacheManager cacheManager, List<AuthorizingRealm> realms) {
         DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
-        CookieRememberMeManager cookieRememberMeManager=new CookieRememberMeManager();
+        CookieRememberMeManager cookieRememberMeManager = new CookieRememberMeManager();
         Cookie cookie = new SimpleCookie("rememberMe");
         cookie.setHttpOnly(true);
         //设置为7天
-        cookie.setMaxAge(60 * 60 * 24 *7);
+        cookie.setMaxAge(60 * 60 * 24 * 7);
         cookieRememberMeManager.setCookie(cookie);
         securityManager.setRememberMeManager(cookieRememberMeManager);
         // 设置realm.
@@ -341,7 +341,7 @@ public class ShiroCasConfig {
         securityManager.setCacheManager(cacheManager);
         // 自定义session管理 使用redis
         securityManager.setSessionManager(sessionManager);
-        ModularRealmAuthenticator authenticator=new ModularRealmAuthenticator();
+        ModularRealmAuthenticator authenticator = new ModularRealmAuthenticator();
         authenticator.setRealms(Lists.newArrayList(realms));
         authenticator.setAuthenticationStrategy(new AtLeastOneSuccessfulStrategy());
         securityManager.setAuthenticator(authenticator);

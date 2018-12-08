@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>service-auth-client</artifactId>
+    <artifactId>service-base-client</artifactId>
 
     <dependencies>
         <dependency>

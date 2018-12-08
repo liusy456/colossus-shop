@@ -30,6 +30,18 @@ public class ShiroUtil {
      * @return
      */
     public static String getProfileAttribute(String attrName){
+        CommonProfile profile = getProfile();
+        if(profile!=null){
+            return (String)profile.getAttribute(attrName);
+        }
+        return null;
+    }
+
+    /**
+     *  从CAS的Principal里面获取profile
+     * @return
+     */
+    public static CommonProfile getProfile(){
         try {
             Subject subject=SecurityUtils.getSubject();
             if(subject!=null){
@@ -37,7 +49,7 @@ public class ShiroUtil {
                 if(pac4jPrincipal!=null){
                     CommonProfile profile=pac4jPrincipal.getProfile();
                     if(profile!=null){
-                        return (String)profile.getAttribute(attrName);
+                        return profile;
                     }
                 }
             }
