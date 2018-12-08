@@ -1,9 +1,12 @@
 package com.colossus.sso.handler;
 
+import com.colossus.sso.credential.CustomEcodePasswordCredential;
+import com.colossus.sso.utils.AppUtils;
 import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.codec.CodecException;
 import org.apache.shiro.codec.Hex;
+import org.apache.shiro.crypto.hash.*;
 import org.apache.shiro.util.ByteSource;
 import org.apache.shiro.util.ByteSource.Util;
 import org.apereo.cas.adaptors.jdbc.QueryAndEncodeDatabaseAuthenticationHandler;
@@ -16,8 +19,6 @@ import org.apereo.cas.authentication.exceptions.AccountPasswordMustChangeExcepti
 import org.apereo.cas.authentication.handler.PrincipalNameTransformer;
 import org.apereo.cas.authentication.principal.PrincipalFactory;
 import org.apereo.cas.services.ServicesManager;
-import org.jasig.cas.credential.CustomEcodePasswordCredential;
-import org.jasig.cas.utils.AppUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataAccessException;
@@ -176,7 +177,7 @@ public class MyAuthenticationHandler extends QueryAndEncodeDatabaseAuthenticatio
         }
     }
 
-    private Hash hashProvidedCredentials(Object credentials, Object salt, int hashIterations,String hashAlgorithmName) {
+    private Hash hashProvidedCredentials(Object credentials, Object salt, int hashIterations, String hashAlgorithmName) {
         return new SimpleHash(hashAlgorithmName, credentials, ByteSource.Util.bytes(salt), hashIterations);
     }
 

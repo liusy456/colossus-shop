@@ -1,9 +1,9 @@
 {
   "@class" : "org.apereo.cas.services.RegexRegisteredService",
-  "serviceId" : "^(https|imaps|http)://([\\s\\S]*?)/([\\s\\S]*?manager[\\s\\S]*?).*",
+  "serviceId" : "^(https|imaps|http)://([\\s\\S]*?)/([\\s\\S]*?manager[\\s\\S]*?)/.*",
   "name" : "manager server",
   "id" : 100001,
-  "description" : "认证天称星管理端",
+  "description" : "管理端认证，二次认证",
   "evaluationOrder" : 10002,
   "attributeReleasePolicy": {
     "@class": "org.apereo.cas.services.ReturnAllowedAttributeReleasePolicy",

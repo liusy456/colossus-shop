@@ -1,9 +1,9 @@
 {
   "@class" : "org.apereo.cas.services.RegexRegisteredService",
-  "serviceId" : "^(https|imaps|http)://([\\s\\S]*?)/(?!([\\s\\S]*?manager[\\s\\S]*?)).*",
+  "serviceId" : "^(https|imaps|http)://([\\s\\S]*?)/(?!([\\s\\S]*?manager[\\s\\S]*?))/.*",
   "name" : "web",
   "id" : 100002,
-  "description" : "认证天称星web端",
+  "description" : "web端认证，没有二次认证",
   "evaluationOrder" : 10001,
   "attributeReleasePolicy": {
     "@class": "org.apereo.cas.services.ReturnAllowedAttributeReleasePolicy",

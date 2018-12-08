@@ -1,9 +1,9 @@
 package com.colossus.sso.flow;
 
+import com.colossus.sso.utils.AppUtils;
 import okhttp3.OkHttpClient;
 import org.apereo.cas.authentication.principal.Principal;
 import org.apereo.cas.web.support.WebUtils;
-import org.jasig.cas.utils.AppUtils;
 import org.springframework.binding.message.MessageBuilder;
 import org.springframework.binding.message.MessageContext;
 import org.springframework.webflow.action.AbstractAction;

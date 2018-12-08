@@ -2,6 +2,8 @@ package com.colossus.sso.utils;
 
 
 import com.alibaba.fastjson.JSON;
+import com.colossus.sso.exception.ServiceException;
+import com.colossus.sso.vo.ApiError;
 import okhttp3.*;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -9,8 +11,6 @@ import org.apache.commons.lang3.time.DateUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.UnavailableSecurityManagerException;
 import org.apache.shiro.subject.Subject;
-import org.jasig.cas.exception.ServiceException;
-import org.jasig.cas.vo.ApiError;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.context.request.RequestAttributes;

@@ -58,4 +58,4 @@ spring:
         use-new-id-generator-mappings: true
         ddl-auto: none
         naming:
-          strategy: org.hibernate.cfg.ImprovedNamingStrategy
+          physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl

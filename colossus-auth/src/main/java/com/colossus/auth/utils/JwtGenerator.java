@@ -31,11 +31,11 @@ public class JwtGenerator {
 
     @Value("${spring.application.name}")
     private String serviceId;
-    @Value("${jwt.signingSecret}")
+    @Value("${spring.jwt.signingSecret}")
     private String signingSecret;
-    @Value("${jwt.encryptionSecret}")
+    @Value("${spring.jwt.encryptionSecret}")
     private String encryptionSecret;
-    @Value("${jwt.header}")
+    @Value("${spring.jwt.header}")
     private String header;
 
     @Scheduled(cron = "0 0/10 * * * ?")

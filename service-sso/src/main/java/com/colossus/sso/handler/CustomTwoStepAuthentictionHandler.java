@@ -1,5 +1,7 @@
 package com.colossus.sso.handler;
 
+import com.colossus.sso.credential.CustomTwoStepCredential;
+import com.colossus.sso.exception.ServiceException;
 import okhttp3.*;
 import org.apereo.cas.authentication.Credential;
 import org.apereo.cas.authentication.HandlerResult;
@@ -7,8 +9,6 @@ import org.apereo.cas.authentication.PreventedException;
 import org.apereo.cas.authentication.handler.support.AbstractPreAndPostProcessingAuthenticationHandler;
 import org.apereo.cas.authentication.principal.PrincipalFactory;
 import org.apereo.cas.services.ServicesManager;
-import org.jasig.cas.credential.CustomTwoStepCredential;
-import org.jasig.cas.exception.ServiceException;
 
 import javax.security.auth.login.FailedLoginException;
 import java.security.GeneralSecurityException;

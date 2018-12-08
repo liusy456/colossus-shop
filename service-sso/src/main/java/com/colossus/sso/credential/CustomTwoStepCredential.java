@@ -1,9 +1,10 @@
 package com.colossus.sso.credential;
 
+
+import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
 import org.apereo.cas.authentication.Credential;
 
 import java.io.Serializable;
@@ -22,7 +23,7 @@ public class CustomTwoStepCredential implements Credential, Serializable {
     }
 
     public String toString() {
-        return (new ToStringBuilder(this, ToStringStyle.NO_CLASS_NAME_STYLE)).append("token", this.token).toString();
+        return (new ToStringBuilder(this, ToStringStyle.NO_FIELD_NAMES_STYLE)).append("token", this.token).toString();
     }
 
     public boolean equals(Object obj) {
