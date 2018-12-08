@@ -1,6 +1,5 @@
 package com.colossus.common.utils;
 
-import com.colossus.common.exception.BaseException;
 import org.apache.commons.lang3.Validate;
 
 import java.io.IOException;

@@ -1,6 +1,5 @@
 package com.colossus.common.utils;
 
-import com.colossus.common.exception.BaseException;
 import com.google.common.collect.Lists;
 import org.apache.commons.codec.DecoderException;
 import org.apache.commons.codec.binary.Base64;
