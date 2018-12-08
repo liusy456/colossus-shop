@@ -7,10 +7,15 @@ server:
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://127.0.0.1:8501/eureka/
+      defaultZone: https://127.0.0.1:8501/eureka/
   instance:
-    hostname: ${hostname:admin}
     prefer-ip-address: true
+    home-page-url-path: ${server.servlet.context-path}/swagger-ui.html
+    status-page-url-path: ${server.servlet.context-path}/actuator/info
+    health-check-url-path: ${server.servlet.context-path}/actuator/health
+    metadata-map:
+      management:
+        context-path: ${server.servlet.context-path}/actuator
 management:
   endpoints:
     web:

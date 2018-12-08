@@ -8,6 +8,18 @@ spring:
     base-url: http://localhost:8504/
 server:
   port: 8505
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: https://127.0.0.1:8501/eureka/
+  instance:
+    prefer-ip-address: true
+    home-page-url-path: ${server.servlet.context-path}/swagger-ui.html
+    status-page-url-path: ${server.servlet.context-path}/actuator/info
+    health-check-url-path: ${server.servlet.context-path}/actuator/health
+    metadata-map:
+      management:
+        context-path: ${server.servlet.context-path}/actuator
 management:
   endpoints:
     web:
@@ -16,10 +28,6 @@ management:
   endpoint:
     health:
       show-details: ALWAYS
-eureka:
-  client:
-    serviceUrl:
-      defaultZone: http://127.0.0.1:8501/eureka/
 zuul:
   routes:
     test:
