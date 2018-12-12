@@ -13,7 +13,7 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>common</module>
+        <module>colossus-common</module>
         <module>cloud-admin</module>
         <module>cloud-config</module>
         <module>cloud-eureka</module>
@@ -26,10 +26,10 @@
         <module>service-order</module>
         <module>service-portal</module>
         <module>service-search</module>
-        <module>service-base</module>
+        <module>service-member</module>
         <module>service-redis</module>
         <module>service-admin-client</module>
-        <module>service-base-client</module>
+        <module>service-member-client</module>
         <module>service-cart-client</module>
         <module>service-item-client</module>
         <module>service-notify-client</module>
@@ -78,6 +78,25 @@
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${slf4j-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
             <version>${spring-boot-version}</version>
         </dependency>
@@ -100,6 +119,16 @@
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
             <version>${fastjson-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-csv</artifactId>
+            <version>1.4</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-compress</artifactId>
+            <version>1.14</version>
         </dependency>
         <dependency>
             <groupId>commons-io</groupId>

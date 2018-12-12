@@ -191,7 +191,7 @@ public class ShiroCasConfig {
         definition.addPathDefinition("/logout", "logout");
         //微服务接口不做登录认证，只做服务鉴权
         definition.addPathDefinition("/service/**", "anon");
-        definition.addPathDefinition("/**", "auth");
+        definition.addPathDefinition("/**", "member");
         //definition.addPathDefinition("/api/v1/ebay-call-back/**", "anon");
         return definition;
     }
@@ -317,7 +317,7 @@ public class ShiroCasConfig {
         sessionManager.setCacheManager(cacheManager);
         Cookie cookie = new SimpleCookie();
         cookie.setPath(contextPath);
-        cookie.setName("auth-id");
+        cookie.setName("member-id");
         sessionManager.setDeleteInvalidSessions(true);
         sessionManager.setSessionIdCookie(cookie);
         sessionManager.setSessionFactory(simpleSessionFactory);

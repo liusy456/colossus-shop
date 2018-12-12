@@ -2,9 +2,6 @@ package com.colossus.common.vo;
 
 /**
  * Ajax返回对象扩展
- *
- * @author ganbo
- * @date 2017年3月2日 上午10:03:47
  */
 public class BaseResult{
 

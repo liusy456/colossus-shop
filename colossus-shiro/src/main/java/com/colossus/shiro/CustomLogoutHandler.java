@@ -73,13 +73,13 @@ public class CustomLogoutHandler<C extends WebContext> implements CasLogoutHandl
                 // remove profiles
                 final ProfileManager manager = new ProfileManager(context);
                 manager.logout();
-                logger.debug("destroy the user profiles");
+                logger.debug("destroy the member profiles");
                 if(destroySession){
                     SessionKey sessionKey=new DefaultSessionKey(trackSessionId);
                     sessionManager.stop(sessionKey);
                 }
             } else {
-                logger.error("The user profiles (and session) can not be destroyed for CAS front channel logout because the provided ticket is not the same as the one linked to the current session");
+                logger.error("The member profiles (and session) can not be destroyed for CAS front channel logout because the provided ticket is not the same as the one linked to the current session");
             }
         }
     }
@@ -88,7 +88,7 @@ public class CustomLogoutHandler<C extends WebContext> implements CasLogoutHandl
         // remove profiles
         final ProfileManager manager = new ProfileManager(context);
         manager.logout();
-        logger.debug("destroy the user profiles");
+        logger.debug("destroy the member profiles");
         // and optionally the web session
         if (destroySession) {
             logger.debug("destroy the whole session");

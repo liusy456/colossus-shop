@@ -3,9 +3,6 @@ package com.colossus.common.vo;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
-/**
- * Created by liukx on 17.12.7 0007.
- */
 public class PageRequest {
 
     private int page = 0;

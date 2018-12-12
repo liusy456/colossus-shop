@@ -49,7 +49,7 @@ public class AppUtils {
 				.add("phone", phone)
 				.add("bizType",bizType)
 				.build();
-		Request request=new Request.Builder().url(memberUrl+"/api/user/send-captcha").post(formBody).build();
+		Request request=new Request.Builder().url(memberUrl+"/api/member/send-captcha").post(formBody).build();
 		try {
 			Response response=okHttpClient.newCall(request).execute();
 			if(!response.isSuccessful()){
@@ -104,7 +104,7 @@ public class AppUtils {
 	/**
 	 * 获得当前用户Id
 	 *
-	 * @return the current user id
+	 * @return the current member id
 	 */
 	public static String getCurrentUserId() {
 		try {

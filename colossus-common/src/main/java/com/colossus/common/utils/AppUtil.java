@@ -134,8 +134,8 @@ public class AppUtil {
      */
     public static String entryptPassword(String plainPassword) {
         String plain = StringUtil.unescapeHtml(plainPassword);
-        byte[] salt = HashUtil.generateSalt(AppConfig.SALT_SIZE);
-        byte[] hashPassword = HashUtil.sha1(plain.getBytes(),salt,AppConfig.HASH_INTERATIONS);
+        byte[] salt = HashUtil.generateSalt(8);
+        byte[] hashPassword = HashUtil.sha1(plain.getBytes(),salt,1024);
         return StringUtil.encodeHex(salt)+StringUtil.encodeHex(hashPassword);
     }
 }

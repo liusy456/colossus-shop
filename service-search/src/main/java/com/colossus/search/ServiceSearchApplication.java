@@ -34,7 +34,7 @@ public class ServiceSearchApplication {
 				.put("request.headers.X-Found-Cluster", "elasticsearch")
 				.put("xpack.security.transport.ssl.enabled", false)
 				.put("cluster.name", "elasticsearch")
-				.put("xpack.security.user", "liusy:417937")
+				.put("xpack.security.member", "liusy:417937")
 				.build())
 				.addTransportAddress(new InetSocketTransportAddress(InetAddress.getByName("192.168.0.50"),9300))
 				.addTransportAddress(new InetSocketTransportAddress(InetAddress.getByName("192.168.0.51"),9300))

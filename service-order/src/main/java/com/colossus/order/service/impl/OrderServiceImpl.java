@@ -1,6 +1,6 @@
 package com.colossus.order.service.impl;
 
-import com.colossus.auth.service.SSOService;
+import com.colossus.member.service.SSOService;
 import com.colossus.common.dao.OrderItemMapper;
 import com.colossus.common.dao.OrderMapper;
 import com.colossus.common.model.*;

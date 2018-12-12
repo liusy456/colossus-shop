@@ -2,7 +2,7 @@ spring:
   datasource:
 #    c3p0:
 #      jdbcUrl: jdbc:mysql://localhost:3306/tembin_money?useUnicode=true&characterEncoding=utf-8&autoReconnect=true&zeroDateTimeBehavior=convertToNull&useSSL=false
-#      user: root
+#      member: root
 #      password: 417937
 #      driverClass: com.mysql.jdbc.Driver
 #      minPoolSize: 5
@@ -18,7 +18,7 @@ spring:
 #      testConnectionOnCheckout: false
     druid:
       url: ${datasource.url}
-      username: ${datasource.user}
+      username: ${datasource.member}
       password: ${datasource.password}
       driver-class-name: com.mysql.jdbc.Driver
       max-open-prepared-statements: 20

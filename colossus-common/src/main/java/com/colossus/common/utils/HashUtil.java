@@ -1,5 +1,6 @@
 package com.colossus.common.utils;
 
+import com.colossus.common.exception.ServiceException;
 import org.apache.commons.lang3.Validate;
 
 import java.io.IOException;
@@ -63,7 +64,7 @@ public class HashUtil {
             }
             return result;
         } catch (GeneralSecurityException e) {
-            throw BaseException.unchecked(e);
+            throw ServiceException.unchecked(e);
         }
     }
 
@@ -108,7 +109,7 @@ public class HashUtil {
 
             return messageDigest.digest();
         } catch (GeneralSecurityException e) {
-            throw BaseException.unchecked(e);
+            throw ServiceException.unchecked(e);
         }
     }
 }

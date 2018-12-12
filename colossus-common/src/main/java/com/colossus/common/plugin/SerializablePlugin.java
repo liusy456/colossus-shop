@@ -13,7 +13,7 @@ import java.util.Properties;
  */
 public class SerializablePlugin extends PluginAdapter {
     private FullyQualifiedJavaType serializable = new FullyQualifiedJavaType("java.io.Serializable");
-    private FullyQualifiedJavaType gwtSerializable = new FullyQualifiedJavaType("com.google.gwt.user.client.rpc.IsSerializable");
+    private FullyQualifiedJavaType gwtSerializable = new FullyQualifiedJavaType("com.google.gwt.member.client.rpc.IsSerializable");
     private boolean addGWTInterface;
     private boolean suppressJavaInterface;
 

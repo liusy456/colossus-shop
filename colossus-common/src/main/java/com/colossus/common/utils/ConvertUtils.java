@@ -2,9 +2,6 @@ package com.colossus.common.utils;
 
 /**
  * String编码转换
- *
- * @author xubin.
- * @create 2017-02-09 下午4:55
  */
 
 

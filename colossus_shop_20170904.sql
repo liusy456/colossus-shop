@@ -125,9 +125,9 @@ INSERT INTO `auth_permission` VALUES ('27', '1', '3', '新增组织', '3', 'upms
 INSERT INTO `auth_permission` VALUES ('28', '1', '3', '编辑组织', '3', 'upms:organization:update', '/manage/organization/update', 'zmdi zmdi-edit', '1', '2017-08-02 12:23:34', '2017-08-02 12:23:34', '28');
 INSERT INTO `auth_permission` VALUES ('29', '1', '3', '删除组织', '3', 'upms:organization:delete', '/manage/organization/delete', 'zmdi zmdi-close', '1', '2017-08-02 12:23:34', '2017-08-02 12:23:34', '29');
 INSERT INTO `auth_permission` VALUES ('3', '1', '1', '组织管理', '2', 'upms:organization:read', '/manage/organization/index', '', '1', '2017-08-02 12:23:34', '2017-08-02 12:23:34', '3');
-INSERT INTO `auth_permission` VALUES ('30', '1', '6', '新增用户', '3', 'upms:user:create', '/manage/user/create', 'zmdi zmdi-plus', '1', '2017-08-02 12:23:34', '2017-08-02 12:23:34', '30');
-INSERT INTO `auth_permission` VALUES ('31', '1', '6', '编辑用户', '3', 'upms:user:update', '/manage/user/update', 'zmdi zmdi-edit', '1', '2017-08-02 12:23:34', '2017-08-02 12:23:34', '31');
-INSERT INTO `auth_permission` VALUES ('32', '1', '6', '删除用户', '3', 'upms:user:delete', '/manage/user/delete', 'zmdi zmdi-close', '1', '2017-08-02 12:23:34', '2017-08-02 12:23:34', '32');
+INSERT INTO `auth_permission` VALUES ('30', '1', '6', '新增用户', '3', 'upms:member:create', '/manage/member/create', 'zmdi zmdi-plus', '1', '2017-08-02 12:23:34', '2017-08-02 12:23:34', '30');
+INSERT INTO `auth_permission` VALUES ('31', '1', '6', '编辑用户', '3', 'upms:member:update', '/manage/member/update', 'zmdi zmdi-edit', '1', '2017-08-02 12:23:34', '2017-08-02 12:23:34', '31');
+INSERT INTO `auth_permission` VALUES ('32', '1', '6', '删除用户', '3', 'upms:member:delete', '/manage/member/delete', 'zmdi zmdi-close', '1', '2017-08-02 12:23:34', '2017-08-02 12:23:34', '32');
 INSERT INTO `auth_permission` VALUES ('33', '1', '5', '新增角色', '3', 'upms:role:create', '/manage/role/create', 'zmdi zmdi-plus', '1', '2017-08-02 12:23:34', '2017-08-02 12:23:34', '33');
 INSERT INTO `auth_permission` VALUES ('34', '1', '5', '编辑角色', '3', 'upms:role:update', '/manage/role/update', 'zmdi zmdi-edit', '1', '2017-08-02 12:23:34', '2017-08-02 12:23:34', '34');
 INSERT INTO `auth_permission` VALUES ('35', '1', '5', '删除角色', '3', 'upms:role:delete', '/manage/role/delete', 'zmdi zmdi-close', '1', '2017-08-02 12:23:34', '2017-08-02 12:23:34', '35');
@@ -137,10 +137,10 @@ INSERT INTO `auth_permission` VALUES ('38', '1', '39', '删除权限', '3', 'upm
 INSERT INTO `auth_permission` VALUES ('39', '1', '7', '权限管理', '2', 'upms:permission:read', '/manage/permission/index', null, '1', '2017-08-02 12:23:34', '2017-08-02 12:23:34', '39');
 INSERT INTO `auth_permission` VALUES ('4', '1', '0', '角色用户管理', '1', '', '', 'zmdi zmdi-accounts', '1', '2017-08-02 12:23:34', '2017-08-02 12:23:34', '4');
 INSERT INTO `auth_permission` VALUES ('46', '1', '5', '角色权限', '3', 'upms:role:permission', '/manage/role/permission', 'zmdi zmdi-key', '1', '2017-08-02 12:23:34', '2017-08-02 12:23:34', '1488091928257');
-INSERT INTO `auth_permission` VALUES ('48', '1', '6', '用户组织', '3', 'upms:user:organization', '/manage/user/organization', 'zmdi zmdi-accounts-list', '1', '2017-08-02 12:23:34', '2017-08-02 12:23:34', '1488120011165');
+INSERT INTO `auth_permission` VALUES ('48', '1', '6', '用户组织', '3', 'upms:member:organization', '/manage/member/organization', 'zmdi zmdi-accounts-list', '1', '2017-08-02 12:23:34', '2017-08-02 12:23:34', '1488120011165');
 INSERT INTO `auth_permission` VALUES ('5', '1', '4', '角色管理', '2', 'upms:role:read', '/manage/role/index', '', '1', '2017-08-02 12:23:34', '2017-08-02 12:23:34', '6');
-INSERT INTO `auth_permission` VALUES ('50', '1', '6', '用户角色', '3', 'upms:user:role', '/manage/user/role', 'zmdi zmdi-accounts', '1', '2017-08-02 12:23:34', '2017-08-02 12:23:34', '1488120554175');
-INSERT INTO `auth_permission` VALUES ('51', '1', '6', '用户权限', '3', 'upms:user:permission', '/manage/user/permission', 'zmdi zmdi-key', '1', '2017-08-02 12:23:34', '2017-08-02 12:23:34', '1488092013302');
+INSERT INTO `auth_permission` VALUES ('50', '1', '6', '用户角色', '3', 'upms:member:role', '/manage/member/role', 'zmdi zmdi-accounts', '1', '2017-08-02 12:23:34', '2017-08-02 12:23:34', '1488120554175');
+INSERT INTO `auth_permission` VALUES ('51', '1', '6', '用户权限', '3', 'upms:member:permission', '/manage/member/permission', 'zmdi zmdi-key', '1', '2017-08-02 12:23:34', '2017-08-02 12:23:34', '1488092013302');
 INSERT INTO `auth_permission` VALUES ('53', '1', '14', '强制退出', '3', 'upms:session:forceout', '/manage/session/forceout', 'zmdi zmdi-run', '1', '2017-08-02 12:23:34', '2017-08-02 12:23:34', '1488379514715');
 INSERT INTO `auth_permission` VALUES ('54', '2', '18', '新增标签', '3', 'cms:tag:create', '/manage/tag/create', 'zmdi zmdi-plus', '1', '2017-08-02 12:23:34', '2017-08-02 12:23:34', '1489417315159');
 INSERT INTO `auth_permission` VALUES ('55', '2', '18', '编辑标签', '3', 'cms:tag:update', 'zmdi zmdi-edit', 'zmdi zmdi-widgets', '1', '2017-08-02 12:23:34', '2017-08-02 12:23:34', '1489417344931');
@@ -148,7 +148,7 @@ INSERT INTO `auth_permission` VALUES ('56', '2', '18', '删除标签', '3', 'cms
 INSERT INTO `auth_permission` VALUES ('57', '1', '15', '删除权限', '3', 'upms:log:delete', '/manage/log/delete', 'zmdi zmdi-close', '1', '2017-08-02 12:23:34', '2017-08-02 12:23:34', '1489503867909');
 INSERT INTO `auth_permission` VALUES ('58', '2', '19', '编辑类目', '3', 'cms:category:update', '/manage/category/update', 'zmdi zmdi-edit', '1', '2017-08-02 12:23:34', '2017-08-02 12:23:34', '1489586600462');
 INSERT INTO `auth_permission` VALUES ('59', '2', '19', '删除类目', '3', 'cms:category:delete', '/manage/category/delete', 'zmdi zmdi-close', '1', '2017-08-02 12:23:34', '2017-08-02 12:23:34', '1489586633059');
-INSERT INTO `auth_permission` VALUES ('6', '1', '4', '用户管理', '2', 'upms:user:read', '/manage/user/index', '', '1', '2017-08-02 12:23:34', '2017-08-02 12:23:34', '5');
+INSERT INTO `auth_permission` VALUES ('6', '1', '4', '用户管理', '2', 'upms:member:read', '/manage/member/index', '', '1', '2017-08-02 12:23:34', '2017-08-02 12:23:34', '5');
 INSERT INTO `auth_permission` VALUES ('60', '2', '19', '新增类目', '3', 'cms:category:create', '/manage/category/create', 'zmdi zmdi-plus', '1', '2017-08-02 12:23:34', '2017-08-02 12:23:34', '1489590342089');
 INSERT INTO `auth_permission` VALUES ('61', '2', '0', '其他数据管理', '1', '', '', 'zmdi zmdi-more', '1', '2017-08-02 12:23:34', '2017-08-02 12:23:34', '1489835455359');
 INSERT INTO `auth_permission` VALUES ('7', '1', '0', '权限资源管理', '1', '', '', 'zmdi zmdi-lock-outline', '1', '2017-08-02 12:23:34', '2017-08-02 12:23:34', '7');

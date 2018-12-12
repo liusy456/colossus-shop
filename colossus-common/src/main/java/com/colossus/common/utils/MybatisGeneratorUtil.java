@@ -17,7 +17,6 @@ import static com.colossus.common.utils.StringUtil.lineToHump;
 
 /**
  * 代码生成类
- * Created by ZhangShuzheng on 2017/1/10.
  */
 public class MybatisGeneratorUtil {
 
