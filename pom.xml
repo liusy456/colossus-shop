@@ -20,23 +20,19 @@
         <module>cloud-zipkin</module>
         <module>cloud-zuul</module>
         <module>service-admin</module>
-        <module>service-cart</module>
-        <module>service-item</module>
+        <module>service-product</module>
         <module>service-notify</module>
         <module>service-order</module>
-        <module>service-portal</module>
         <module>service-search</module>
         <module>service-member</module>
         <module>service-redis</module>
         <module>service-admin-client</module>
         <module>service-member-client</module>
-        <module>service-cart-client</module>
-        <module>service-item-client</module>
+        <module>service-product-client</module>
         <module>service-notify-client</module>
         <module>service-order-client</module>
         <module>service-redis-client</module>
         <module>service-search-client</module>
-        <module>service-portal-client</module>
         <module>service-pay</module>
         <module>service-pay-client</module>
         <module>colossus-shiro</module>

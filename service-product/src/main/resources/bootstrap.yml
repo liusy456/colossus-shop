@@ -1,0 +1,7 @@
+spring:
+  cloud:
+    config:
+      allow-override: true
+      name: client-product
+      profile: dev
+      uri: http://localhost:8502/

@@ -4,6 +4,9 @@ import lombok.Data;
 
 import java.util.Date;
 
+/**
+ * 订单物流信息
+ */
 @Data
 public class Logistics {
 

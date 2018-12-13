@@ -7,7 +7,7 @@ import org.springframework.data.elasticsearch.annotations.Field;
 import org.springframework.data.elasticsearch.annotations.FieldType;
 
 
-@Document(indexName = "item",type = "item")
+@Document(indexName = "product",type = "product")
 @Data
 public class Item {
 
