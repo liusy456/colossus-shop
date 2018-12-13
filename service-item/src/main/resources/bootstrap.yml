@@ -2,6 +2,6 @@ spring:
   cloud:
     config:
       allow-override: true
-      name: service-item
+      name: client-item
       profile: dev
       uri: http://localhost:8502/

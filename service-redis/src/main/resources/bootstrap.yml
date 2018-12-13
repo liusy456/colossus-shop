@@ -2,6 +2,6 @@ spring:
   cloud:
     config:
       allow-override: true
-      name: service-redis
+      name: client-redis
       profile: dev
       uri: http://localhost:8502/

@@ -119,14 +119,14 @@ public class RegisterAutoLoginController extends AbstractController{
      * @return redirect URL
      */
     private String getSignInView(HttpServletRequest request) {
-        String service = ServletRequestUtils.getStringParameter(request, "service", "");
+        String service = ServletRequestUtils.getStringParameter(request, "client", "");
         String returnUrl=ServletRequestUtils.getStringParameter(request, "returnUrl", "");
         String redirect="redirect:login";
         if(StringUtils.isNotEmpty(service)&& StringUtils.isNotEmpty(returnUrl)){
-            redirect= redirect+"?"+(StringUtils.isNotEmpty(service)?"service="+service:"")+"&"+(StringUtils.isNotEmpty(returnUrl)?"returnUrl="+returnUrl:"");
+            redirect= redirect+"?"+(StringUtils.isNotEmpty(service)?"client="+service:"")+"&"+(StringUtils.isNotEmpty(returnUrl)?"returnUrl="+returnUrl:"");
         }
          else if(StringUtils.isNotEmpty(service)){
-            redirect= redirect+"?"+(StringUtils.isNotEmpty(service)?"service="+service:"");
+            redirect= redirect+"?"+(StringUtils.isNotEmpty(service)?"client="+service:"");
         }
         else if(StringUtils.isNotEmpty(returnUrl)){
             redirect= redirect+"?"+(StringUtils.isNotEmpty(returnUrl)?"returnUrl="+returnUrl:"");

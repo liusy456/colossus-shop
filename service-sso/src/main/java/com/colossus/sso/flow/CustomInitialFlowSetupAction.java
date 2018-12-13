@@ -63,34 +63,34 @@ public class CustomInitialFlowSetupAction extends AbstractAction {
             String loginTo=request.getParameter("login_to");
             if(StringUtils.isNotEmpty(loginTo)){
                 if(loginTo.equals("0")){
-                    request.setAttribute("service", moneyHome);
+                    request.setAttribute("client", moneyHome);
                 }else {
-                    request.setAttribute("service",oldriverHome);
+                    request.setAttribute("client",oldriverHome);
                 }
                 service=WebUtils.getService(this.argumentExtractors,request);
             }
         }
 
         if (service != null) {
-            LOGGER.debug("Placing service in context scope: [{}]", service.getId());
+            LOGGER.debug("Placing client in context scope: [{}]", service.getId());
 
             final RegisteredService registeredService = this.servicesManager.findServiceBy(service);
             if (registeredService != null && registeredService.getAccessStrategy().isServiceAccessAllowed()) {
-                LOGGER.debug("Placing registered service [{}] with id [{}] in context scope",
+                LOGGER.debug("Placing registered client [{}] with id [{}] in context scope",
                         registeredService.getServiceId(),
                         registeredService.getId());
                 WebUtils.putRegisteredService(context, registeredService);
 
                 final RegisteredServiceAccessStrategy accessStrategy = registeredService.getAccessStrategy();
                 if (accessStrategy.getUnauthorizedRedirectUrl() != null) {
-                    LOGGER.debug("Placing registered service's unauthorized redirect url [{}] with id [{}] in context scope",
+                    LOGGER.debug("Placing registered client's unauthorized redirect url [{}] with id [{}] in context scope",
                             accessStrategy.getUnauthorizedRedirectUrl(),
                             registeredService.getServiceId());
                     WebUtils.putUnauthorizedRedirectUrl(context, accessStrategy.getUnauthorizedRedirectUrl());
                 }
             }
         } else if (!casProperties.getSso().isMissingService()) {
-            LOGGER.warn("No service authentication request is available at [{}]. CAS is configured to disable the flow.",
+            LOGGER.warn("No client authentication request is available at [{}]. CAS is configured to disable the flow.",
                     WebUtils.getHttpServletRequest(context).getRequestURL());
             throw new NoSuchFlowExecutionException(context.getFlowExecutionContext().getKey(),
                     new UnauthorizedServiceException("screen.service.required.message", "Service is required"));

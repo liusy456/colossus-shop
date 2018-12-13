@@ -2,7 +2,7 @@ spring:
   cloud:
     config:
       allow-override: true
-      name: service-order
+      name: client-order
       profile: dev
       uri: http://localhost:8502/
 

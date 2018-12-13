@@ -24,7 +24,7 @@ public class FilterConfig {
         FilterRegistrationBean registrationBean=new FilterRegistrationBean();
         registrationBean.setFilter(serviceAuthFilter);
         List<String> urlPatterns=new ArrayList<String>();
-        urlPatterns.add("/service/**");//只拦截微服务的接口
+        urlPatterns.add("/client/**");//只拦截微服务的接口
         registrationBean.setUrlPatterns(urlPatterns);
         registrationBean.setOrder(1);
         return registrationBean;

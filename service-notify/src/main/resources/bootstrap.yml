@@ -2,7 +2,7 @@ spring:
   cloud:
     config:
       allow-override: true
-      name: service-notify
+      name: client-notify
       profile: dev
       uri: http://localhost:8502/
 

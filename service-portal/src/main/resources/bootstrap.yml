@@ -2,7 +2,7 @@ spring:
   cloud:
     config:
       allow-override: true
-      name: service-portal
+      name: client-portal
       profile: dev
       uri: http://localhost:8502/
 

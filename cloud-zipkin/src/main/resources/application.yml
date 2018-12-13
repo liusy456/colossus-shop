@@ -3,7 +3,7 @@ server:
 
 spring:
   application:
-    # This ends up as the service name in zipkin
+    # This ends up as the client name in zipkin
     name: zipkin-server
 eureka:
   client:

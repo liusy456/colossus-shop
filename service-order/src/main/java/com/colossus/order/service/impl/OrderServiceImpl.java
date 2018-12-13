@@ -1,12 +1,11 @@
 package com.colossus.order.service.impl;
 
-import com.colossus.member.service.SSOService;
 import com.colossus.common.dao.OrderItemMapper;
 import com.colossus.common.dao.OrderMapper;
-import com.colossus.common.model.*;
 import com.colossus.common.utils.AppConfig;
 import com.colossus.common.utils.FastJsonConvert;
 import com.colossus.common.utils.IDUtils;
+import com.colossus.member.client.SSOService;
 import com.colossus.order.service.OrderService;
 import com.colossus.redis.service.RedisService;
 import io.swagger.annotations.*;
@@ -16,6 +15,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
+import org.springframework.core.annotation.Order;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Date;

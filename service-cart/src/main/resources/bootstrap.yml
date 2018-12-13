@@ -2,7 +2,7 @@ spring:
   cloud:
     config:
       allow-override: true
-      name: service-cart
+      name: client-cart
       profile: dev
       uri: http://localhost:8502/
 

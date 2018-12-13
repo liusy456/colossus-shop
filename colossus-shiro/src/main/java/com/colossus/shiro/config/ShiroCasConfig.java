@@ -190,7 +190,7 @@ public class ShiroCasConfig {
         definition.addPathDefinition("/callback", "callback");
         definition.addPathDefinition("/logout", "logout");
         //微服务接口不做登录认证，只做服务鉴权
-        definition.addPathDefinition("/service/**", "anon");
+        definition.addPathDefinition("/client/**", "anon");
         definition.addPathDefinition("/**", "member");
         //definition.addPathDefinition("/api/v1/ebay-call-back/**", "anon");
         return definition;
