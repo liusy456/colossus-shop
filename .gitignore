@@ -1,24 +1,5 @@
-<<<<<<< HEAD
 # Created by .ignore support plugin (hsz.mobi)
-### Maven template
-target/
-pom.xml.tag
-pom.xml.releaseBackup
-pom.xml.versionsBackup
-pom.xml.next
-release.properties
-dependency-reduced-pom.xml
-buildNumber.properties
-.mvn/timing.properties
-.mvn/wrapper/maven-wrapper.jar
-### Example user template template
-### Example user template
-
-# IntelliJ project files
-.idea
-*.iml
-out
-gen### Java template
+### Java template
 # Compiled class file
 *.class
 
@@ -103,46 +84,22 @@ fabric.properties
 
 # Editor-based Rest Client
 .idea/httpRequests
+### Example user template template
+### Example user template
 
-=======
-*.java.hsp
-*.sonarj
-*.sw*
-.DS_Store
-.settings
-.springBeans
-bin
-build.sh
-integration-repo
-ivy-cache
-jxl.log
-jmx.log
-derby.log
-spring-test/test-output/
-*.gradle
-argfile*
-activemq-data/
-
-classes/
-/build
-buildSrc/build
-/spring-*/build
-/src/asciidoc/build
-target/
-
-# Eclipse artifacts, including WTP generated manifests
-.classpath
-.project
-spring-*/src/main/java/META-INF/MANIFEST.MF
-
-# IDEA artifacts and output dirs
-*.iml
-*.ipr
-*.iws
+# IntelliJ project files
 .idea
+*.iml
 out
-test-output
-atlassian-ide-plugin.xml
-.gradletasknamecache
-build
->>>>>>> 304803172958dc74235743624b22c3d2be9798d5
+gen### Maven template
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+.mvn/wrapper/maven-wrapper.jar
+
