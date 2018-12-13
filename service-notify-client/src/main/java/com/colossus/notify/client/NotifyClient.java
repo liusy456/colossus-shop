@@ -1,6 +1,6 @@
-package com.colossus.notify.service;
+package com.colossus.notify.client;
 
-import com.colossus.notify.service.hystrix.NotifyUserServiceHystrix;
+import com.colossus.notify.client.hystrix.NotifyClientHystrix;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * 用户通知服务接口
  */
 
-@FeignClient(value = "service-notify",fallback = NotifyUserServiceHystrix.class)
-public interface NotifyUserService {
+@FeignClient(value = "service-notify",fallback = NotifyClientHystrix.class)
+public interface NotifyClient {
     /**
      * 发送短信
      *

@@ -1,9 +1,7 @@
-package com.colossus.search.service;
+package com.colossus.search.client;
 
 
-import com.colossus.common.model.BaseResult;
-import com.colossus.common.model.SearchResult;
-import com.colossus.search.service.hystrix.SearchServiceHystrix;
+import com.colossus.search.client.hystrix.SearchClientHystrix;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -13,19 +11,17 @@ import org.springframework.web.bind.annotation.RequestParam;
  * es Service
  */
 
-@FeignClient(value = "service-search",fallback = SearchServiceHystrix.class)
-public interface SearchService {
+@FeignClient(value = "service-search",fallback = SearchClientHystrix.class)
+public interface SearchClient {
 
-    //http://localhost:8512/search/SolrService/importAllItems/TztyomXxDyi92
     /**
      * 导入全部商品索引
      *
      * @return
      */
     @RequestMapping(value = "/importAllItems",method = RequestMethod.POST)
-    BaseResult importAllItems();
+    void importAllItems();
 
-    //http://localhost:8512/search/SolrService/search/查询条件/1/60
     /**
      * 查询商品
      * @param queryString 查询条件
@@ -35,7 +31,7 @@ public interface SearchService {
      * @throws Exception
      */
     @RequestMapping(value = "/search",method = RequestMethod.POST)
-    SearchResult search(
+    void search(
             @RequestParam("q")                  String queryString,
             @RequestParam(name = "page",defaultValue = "1")   Integer page,
             @RequestParam(name = "rows",defaultValue = "0")   Integer rows

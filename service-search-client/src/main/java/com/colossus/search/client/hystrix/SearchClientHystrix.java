@@ -1,8 +1,6 @@
-package com.colossus.search.service.hystrix;
+package com.colossus.search.client.hystrix;
 
-import com.colossus.common.model.BaseResult;
-import com.colossus.common.model.SearchResult;
-import com.colossus.search.service.SearchService;
+import com.colossus.search.client.SearchClient;
 import org.springframework.stereotype.Component;
 
 /**
@@ -10,7 +8,7 @@ import org.springframework.stereotype.Component;
  */
 
 @Component
-public class SearchServiceHystrix implements SearchService {
+public class SearchClientHystrix implements SearchClient {
 
 
     /**
@@ -19,8 +17,8 @@ public class SearchServiceHystrix implements SearchService {
      * @return
      */
     @Override
-    public BaseResult importAllItems() {
-        return null;
+    public void importAllItems() {
+
     }
 
     /**
@@ -33,7 +31,7 @@ public class SearchServiceHystrix implements SearchService {
      * @throws Exception
      */
     @Override
-    public SearchResult search(String queryString, Integer page, Integer rows) {
-        return null;
+    public void search(String queryString, Integer page, Integer rows) {
+
     }
 }
