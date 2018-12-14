@@ -298,13 +298,13 @@
         <snapshotRepository>
             <id>nexus-snapshots</id>
             <name>Snapshot Repository</name>
-            <url>http://localhost:8090/repository/maven-snapshots/</url>
+            <url>http://maven.colossus.vip/repository/maven-snapshots/</url>
         </snapshotRepository>
 
         <repository>
             <id>nexus-releases</id>
             <name>Releases Repository</name>
-            <url>http://localhost:8090/repository/maven-releases/</url>
+            <url>http://maven.colossus.vip/repository/maven-releases/</url>
         </repository>
 
     </distributionManagement>
