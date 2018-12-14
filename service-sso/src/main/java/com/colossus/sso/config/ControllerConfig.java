@@ -1,5 +1,8 @@
 package com.colossus.sso.config;
 
+import com.colossus.sso.controller.RegisterAutoLoginController;
+import com.colossus.sso.controller.SendCaptchaController;
+import com.colossus.sso.handler.CustomApplicationServiceResponseBuilder;
 import com.nimbusds.jose.EncryptionMethod;
 import com.nimbusds.jose.JWEAlgorithm;
 import com.nimbusds.jose.JWSAlgorithm;
@@ -16,9 +19,6 @@ import org.apereo.cas.ticket.ExpirationPolicy;
 import org.apereo.cas.token.cipher.TokenTicketCipherExecutor;
 import org.apereo.cas.web.support.ArgumentExtractor;
 import org.apereo.cas.web.support.CookieRetrievingCookieGenerator;
-import org.jasig.cas.controller.RegisterAutoLoginController;
-import org.jasig.cas.controller.SendCaptchaController;
-import org.jasig.cas.handler.CustomApplicationServiceResponseBuilder;
 import org.pac4j.jwt.config.encryption.SecretEncryptionConfiguration;
 import org.pac4j.jwt.config.signature.SecretSignatureConfiguration;
 import org.pac4j.jwt.profile.JwtGenerator;
@@ -70,7 +70,7 @@ public class ControllerConfig {
     }
 
     @Bean
-    public SendCaptchaController sendCaptchaController(OkHttpClient okHttpClient,@Value("${member.url}")String memberUrl){
+    public SendCaptchaController sendCaptchaController(OkHttpClient okHttpClient, @Value("${member.url}")String memberUrl){
         return  new SendCaptchaController(okHttpClient,memberUrl);
     }
     @Bean("stringRedisTemplate")

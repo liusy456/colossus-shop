@@ -1,5 +1,8 @@
 package com.colossus.sso.config;
 
+import com.colossus.sso.handler.CustomTwoStepAuthentictionHandler;
+import com.colossus.sso.handler.MyAuthenticationHandler;
+import com.colossus.sso.mfaProvider.CustomAuthenticatorMultifactorAuthenticationProvider;
 import okhttp3.OkHttpClient;
 import org.apereo.cas.authentication.AuthenticationEventExecutionPlan;
 import org.apereo.cas.authentication.AuthenticationEventExecutionPlanConfigurer;
@@ -11,9 +14,6 @@ import org.apereo.cas.configuration.CasConfigurationProperties;
 import org.apereo.cas.configuration.model.support.jdbc.JdbcAuthenticationProperties;
 import org.apereo.cas.services.MultifactorAuthenticationProvider;
 import org.apereo.cas.services.ServicesManager;
-import org.jasig.cas.handler.CustomTwoStepAuthentictionHandler;
-import org.jasig.cas.handler.MyAuthenticationHandler;
-import org.jasig.cas.mfaProvider.CustomAuthenticatorMultifactorAuthenticationProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;

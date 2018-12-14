@@ -1,9 +1,9 @@
 package com.colossus.sso.controller;
 
+import com.colossus.sso.utils.AppUtils;
 import okhttp3.OkHttpClient;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.jasig.cas.utils.AppUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.servlet.ModelAndView;

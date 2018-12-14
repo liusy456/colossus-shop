@@ -1,12 +1,12 @@
 package com.colossus.sso.config;
 
+import com.colossus.sso.flow.CustomInitialFlowSetupAction;
+import com.colossus.sso.flow.CustomTwoStepTokenAction;
 import okhttp3.OkHttpClient;
 import org.apereo.cas.configuration.CasConfigurationProperties;
 import org.apereo.cas.services.ServicesManager;
 import org.apereo.cas.web.support.ArgumentExtractor;
 import org.apereo.cas.web.support.CookieRetrievingCookieGenerator;
-import org.jasig.cas.flow.CustomInitialFlowSetupAction;
-import org.jasig.cas.flow.CustomTwoStepTokenAction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;

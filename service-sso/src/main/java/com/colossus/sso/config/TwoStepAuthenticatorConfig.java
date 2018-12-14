@@ -1,8 +1,8 @@
 package com.colossus.sso.config;
 
+import com.colossus.sso.flow.CustomAuthenticatorWebflowConfigurer;
 import org.apereo.cas.configuration.CasConfigurationProperties;
 import org.apereo.cas.web.flow.CasWebflowConfigurer;
-import org.jasig.cas.flow.CustomAuthenticatorWebflowConfigurer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;

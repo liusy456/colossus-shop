@@ -36,9 +36,6 @@ import java.util.*;
 
 /**
  * 系统通用的工具类方法
- * 
- * @author chendilin
- * @date 2016年8月10日
  */
 public class AppUtils {
 	

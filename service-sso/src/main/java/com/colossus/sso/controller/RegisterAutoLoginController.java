@@ -1,5 +1,6 @@
 package com.colossus.sso.controller;
 
+import com.colossus.sso.credential.CustomEcodePasswordCredential;
 import org.apache.commons.lang3.StringUtils;
 import org.apereo.cas.CentralAuthenticationService;
 import org.apereo.cas.authentication.AuthenticationResult;
@@ -9,7 +10,6 @@ import org.apereo.cas.ticket.TicketGrantingTicket;
 import org.apereo.cas.web.support.ArgumentExtractor;
 import org.apereo.cas.web.support.CookieRetrievingCookieGenerator;
 import org.apereo.cas.web.support.WebUtils;
-import org.jasig.cas.credential.CustomEcodePasswordCredential;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.redis.core.RedisTemplate;

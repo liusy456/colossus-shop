@@ -1,7 +1,7 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
   org.apereo.cas.config.CasEmbeddedContainerTomcatConfiguration,\
-  com.colossus.sso.config.MyAuthenticationEventExecutionPlanConfiguration,\
-  com.colossus.sso.config.ControllerConfiguration,\
-  com.colossus.sso.config.FlowActionConfiguration,\
-  com.colossus.sso.config.TwoStepAuthenticatorConfiguration
+  com.colossus.sso.config.MyAuthenticationEventExecutionPlanConfig,\
+  com.colossus.sso.config.ControllerConfig,\
+  com.colossus.sso.config.FlowActionConfig,\
+  com.colossus.sso.config.TwoStepAuthenticatorConfig
 
