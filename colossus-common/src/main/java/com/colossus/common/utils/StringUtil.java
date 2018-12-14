@@ -1,5 +1,6 @@
 package com.colossus.common.utils;
 
+import com.colossus.common.exception.ServiceException;
 import com.google.common.collect.Lists;
 import org.apache.commons.codec.DecoderException;
 import org.apache.commons.codec.binary.Base64;
@@ -376,7 +377,7 @@ public class StringUtil extends StringUtils {
         try {
             return Hex.decodeHex(input.toCharArray());
         } catch (DecoderException e) {
-            throw BaseException.unchecked(e);
+            throw ServiceException.unchecked(e);
         }
     }
 
@@ -469,7 +470,7 @@ public class StringUtil extends StringUtils {
         try {
             return URLEncoder.encode(part, DEFAULT_URL_ENCODING);
         } catch (UnsupportedEncodingException e) {
-            throw BaseException.unchecked(e);
+            throw ServiceException.unchecked(e);
         }
     }
 
@@ -481,7 +482,7 @@ public class StringUtil extends StringUtils {
         try {
             return URLDecoder.decode(part, DEFAULT_URL_ENCODING);
         } catch (UnsupportedEncodingException e) {
-            throw BaseException.unchecked(e);
+            throw ServiceException.unchecked(e);
         }
     }
 

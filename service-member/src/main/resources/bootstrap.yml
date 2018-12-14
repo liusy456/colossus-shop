@@ -2,7 +2,6 @@ spring:
   cloud:
     config:
       allow-override: true
-      name: client-member
+      name: service-member
       profile: dev
       uri: http://localhost:8502/
-

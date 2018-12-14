@@ -2,6 +2,8 @@ package com.colossus.member.dao;
 
 import com.colossus.member.model.AuthFilter;
 
+import java.util.List;
+
 public interface AuthFilterMapper {
 
     int deleteByPrimaryKey(String id);
@@ -15,4 +17,6 @@ public interface AuthFilterMapper {
     int updateByPrimaryKeySelective(AuthFilter record);
 
     int updateByPrimaryKey(AuthFilter record);
+
+    List<AuthFilter> selectByServiceId(String serviceId);
 }

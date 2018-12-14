@@ -11,8 +11,6 @@ import java.util.Map;
 
 /**
  * 存储设置的工厂类
- * 
- * @author Li Jian
  *
  */
 public class StorageFactory implements FactoryBean<StorageService> {

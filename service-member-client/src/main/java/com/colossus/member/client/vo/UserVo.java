@@ -1,11 +1,13 @@
-package com.colossus.member.model;
+package com.colossus.member.client.vo;
 
 import lombok.Data;
 
-import java.util.Date;
-
+/**
+ * @author Tlsy1
+ * @since 2018-12-14 11:51
+ **/
 @Data
-public class User {
+public class UserVo {
 
     private String id;
 
@@ -18,13 +20,5 @@ public class User {
     private String name;
 
     private String defaultShippingAddress;
-
-    private String password;
-
-    private Date createTime;
-
-    private Date updateTime;
-
-
 
 }

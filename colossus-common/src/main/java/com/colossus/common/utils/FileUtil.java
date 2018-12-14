@@ -1,10 +1,10 @@
 package com.colossus.common.utils;
 
 import com.google.common.collect.Lists;
+import org.apache.commons.compress.archivers.zip.ZipArchiveEntry;
+import org.apache.commons.compress.archivers.zip.ZipFile;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.tools.zip.ZipEntry;
-import org.apache.tools.zip.ZipFile;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -13,7 +13,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.util.Enumeration;
 import java.util.List;
+import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
+
 
 /**
  * 文件操作工具
@@ -383,19 +385,6 @@ public class FileUtil extends FileUtils {
      * 写入文件
      * @param fileName 要写入的文件
      */
-    public static void writeToFile(String fileName, String content, boolean append) {
-        try {
-            FileUtil.write(new File(fileName), content, "utf-8", append);
-            logger.debug("文件 " + fileName + " 写入成功!");
-        } catch (IOException e) {
-            logger.debug("文件 " + fileName + " 写入失败! " + e.getMessage());
-        }
-    }
-
-    /**
-     * 写入文件
-     * @param fileName 要写入的文件
-     */
     public static void writeToFile(String fileName, String content, String encoding, boolean append) {
         try {
             FileUtil.write(new File(fileName), content, encoding, append);
@@ -461,19 +450,18 @@ public class FileUtil extends FileUtils {
         try {
             // 根据ZIP文件创建ZipFile对象
 
-
             ZipFile zipFile = new ZipFile(zipFileName);
-            ZipEntry entry = null;
+            ZipArchiveEntry entry = null;
             String entryName = null;
             String descFileDir = null;
             byte[] buf = new byte[4096];
             int readByte = 0;
             // 获取ZIP文件里所有的entry
             @SuppressWarnings("rawtypes")
-            Enumeration enums = zipFile.getEntries();
+            Enumeration<ZipArchiveEntry> enums = zipFile.getEntries();
             // 遍历所有entry
             while (enums.hasMoreElements()) {
-                entry = (ZipEntry) enums.nextElement();
+                entry =  enums.nextElement();
                 // 获得entry的名字
                 entryName = entry.getName();
                 descFileDir = descFileNames + entryName;

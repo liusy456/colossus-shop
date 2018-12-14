@@ -1,6 +1,9 @@
 package com.colossus.member.web.api;
 
 import com.colossus.member.client.UserClient;
+import com.colossus.member.client.vo.UserVo;
+import com.colossus.member.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -9,4 +12,12 @@ import org.springframework.web.bind.annotation.RestController;
  **/
 @RestController
 public class UserFeign implements UserClient {
+
+    @Autowired
+    private UserService userService;
+
+    @Override
+    public UserVo findUserById(String id) {
+        return userService.findUserById(id);
+    }
 }

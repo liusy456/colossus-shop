@@ -2,8 +2,6 @@ package com.colossus.common.service;
 
 /**
  * 文件存储服务
- * 
- * @author Li Jian
  *
  */
 public interface StorageService {

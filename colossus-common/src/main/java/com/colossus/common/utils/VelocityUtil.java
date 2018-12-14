@@ -1,5 +1,6 @@
 package com.colossus.common.utils;
 
+
 import org.apache.commons.io.output.FileWriterWithEncoding;
 import org.apache.commons.lang.StringUtils;
 import org.apache.velocity.Template;

@@ -8,10 +8,12 @@ spring:
     base-url: http://localhost:8504/
 server:
   port: 8505
+  servlet:
+    context-path: /
 eureka:
   client:
     serviceUrl:
-      defaultZone: https://127.0.0.1:8501/eureka/
+      defaultZone: http://127.0.0.1:8501/eureka/
   instance:
     prefer-ip-address: true
     home-page-url-path: ${server.servlet.context-path}/swagger-ui.html
