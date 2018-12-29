@@ -22,7 +22,6 @@
 | Service服务名称|端口|
 |:-:|:-:|
 | Admin-Service      	|8050 |
-| SSO-Service        	|8051 |
 | Product-Service       |8053 |
 | Notify-Service     	|8054 |
 | Order-Service      	|8055 |
@@ -35,7 +34,6 @@
 | Eureka      	 	|8501 |
 | Config     		|8502 |
 | Admin	     	 	|8503 |
-| Zipkin     	 	|8504 |
 | Zuul     	 	 	|8505 |
 
 
