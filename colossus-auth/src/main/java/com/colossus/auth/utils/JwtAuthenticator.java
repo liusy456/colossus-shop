@@ -1,4 +1,4 @@
-package com.colossus.member.utils;
+package com.colossus.auth.utils;
 
 import com.nimbusds.jose.*;
 import com.nimbusds.jwt.*;

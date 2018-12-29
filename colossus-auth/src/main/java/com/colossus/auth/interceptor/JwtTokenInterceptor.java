@@ -1,6 +1,6 @@
-package com.colossus.member.interceptor;
+package com.colossus.auth.interceptor;
 
-import com.colossus.member.utils.JwtGenerator;
+import com.colossus.auth.utils.JwtGenerator;
 import feign.RequestInterceptor;
 import feign.RequestTemplate;
 import org.slf4j.Logger;

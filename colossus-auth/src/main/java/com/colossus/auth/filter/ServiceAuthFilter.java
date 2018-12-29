@@ -1,8 +1,9 @@
-package com.colossus.member.filter;
+package com.colossus.auth.filter;
 
 
-import com.colossus.member.utils.JwtAuthenticator;
-import com.colossus.member.utils.JwtGenerator;
+import com.colossus.auth.utils.JwtAuthenticator;
+import com.colossus.auth.utils.JwtGenerator;
+import com.colossus.common.filter.BaseFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -16,7 +17,7 @@ import java.io.PrintWriter;
  * @author Tlsy1
  * @since 2018-11-08 17:25
  **/
-public class ServiceAuthFilter implements Filter {
+public class ServiceAuthFilter extends BaseFilter {
 
     private static final Logger logger = LoggerFactory.getLogger(ServiceAuthFilter.class);
 
@@ -29,16 +30,11 @@ public class ServiceAuthFilter implements Filter {
     }
 
     @Override
-    public void init(FilterConfig filterConfig) throws ServletException {
-
-    }
-
-    @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 
         HttpServletRequest httpServletRequest = (HttpServletRequest) request;
-
-        if( httpServletRequest.getRequestURI().startsWith("/actuator/")){
+        String uri = httpServletRequest.getRequestURI();
+        if( this.isExclusion(uri)){
             logger.info("健康检查放行remoteAddr:{}, url:{}", httpServletRequest.getRemoteAddr(),
             httpServletRequest.getRequestURL());
             chain.doFilter(request, response);
@@ -64,11 +60,6 @@ public class ServiceAuthFilter implements Filter {
             pw.flush();
             pw.close();
         }
-
-    }
-
-    @Override
-    public void destroy() {
 
     }
 }

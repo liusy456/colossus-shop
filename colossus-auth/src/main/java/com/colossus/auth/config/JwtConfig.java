@@ -1,7 +1,7 @@
-package com.colossus.member.config;
+package com.colossus.auth.config;
 
 
-import com.colossus.member.utils.JwtAuthenticator;
+import com.colossus.auth.utils.JwtAuthenticator;
 import com.nimbusds.jose.EncryptionMethod;
 import com.nimbusds.jose.JWEAlgorithm;
 import com.nimbusds.jose.JWSAlgorithm;

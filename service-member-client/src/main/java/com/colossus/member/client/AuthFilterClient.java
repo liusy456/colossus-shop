@@ -15,6 +15,6 @@ import java.util.List;
 @FeignClient(value = "member",path = "/member",fallback = AuthFilterHystrix.class)
 public interface AuthFilterClient {
 
-    @GetMapping("find-auth-filter-by-service-id")
+    @GetMapping("/client/auth-filter/find-auth-filter-by-service-id")
     List<AuthFilterVo> findAuthFilterByServiceId(@RequestParam(value = "serviceId") String serviceId);
 }

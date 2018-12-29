@@ -17,7 +17,6 @@
         <module>cloud-admin</module>
         <module>cloud-config</module>
         <module>cloud-eureka</module>
-        <module>cloud-zipkin</module>
         <module>cloud-zuul</module>
         <module>service-admin</module>
         <module>service-product</module>
