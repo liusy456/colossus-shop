@@ -13,6 +13,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 @FeignClient(value = "member",path = "/member",fallback = UserClientHystrix.class)
 public interface UserClient {
 
-    @GetMapping("find-user-by-id")
+    @GetMapping("/client/user/find-user-by-id")
     UserVo findUserById(@RequestParam(value = "id") String id);
 }

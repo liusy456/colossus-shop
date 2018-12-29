@@ -1,6 +1,6 @@
-package com.colossus.member.config;
+package com.colossus.auth.config;
 
-import com.colossus.member.interceptor.JwtTokenInterceptor;
+import com.colossus.auth.interceptor.JwtTokenInterceptor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
