@@ -10,7 +10,22 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class NotifyFeign implements NotifyClient {
     @Override
-    public String mobileNotify(String mobile) {
-        return null;
+    public void sendSMS(String phone, String content) {
+
+    }
+
+    @Override
+    public void sendNotify(String clientId, String content) {
+
+    }
+
+    @Override
+    public void sendEmail(String email, String content) {
+
+    }
+
+    @Override
+    public void sendAuthCode(String phone, String code) {
+
     }
 }
