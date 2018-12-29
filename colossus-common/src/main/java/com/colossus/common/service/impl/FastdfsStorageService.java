@@ -16,8 +16,6 @@ import java.io.PrintWriter;
 
 /**
  * FastDFS存储服务
- * 
- * @author Li Jian
  *
  */
 
@@ -34,7 +32,7 @@ public class FastdfsStorageService implements StorageService, InitializingBean {
 	public String upload(byte[] data, String extName) {
 		TrackerServer trackerServer = null;
 		StorageServer storageServer = null;
-		StorageClient1 storageClient1 = null;
+		StorageClient1 storageClient = null;
 		try {
 			NameValuePair[] meta_list = null; // new NameValuePair[0];
 
@@ -43,29 +41,15 @@ public class FastdfsStorageService implements StorageService, InitializingBean {
 				logger.error("getConnection return null");
 			}
 			storageServer = trackerClient.getStoreStorage(trackerServer);
-			storageClient1 = new StorageClient1(trackerServer, storageServer);
-			String fileid = storageClient1.upload_file1(data, extName, meta_list);
+			storageClient = new StorageClient1(trackerServer, storageServer);
+			String fileid = storageClient.upload_file1(data, extName, meta_list);
 			logger.debug("uploaded file <{}>", fileid);
 			return fileid;
 		} catch (Exception ex) {
 			logger.error("Upload fail", ex);
 			return null;
 		} finally {
-			if (storageServer != null) {
-				try {
-					storageServer.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-			if (trackerServer != null) {
-				try {
-					trackerServer.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-			storageClient1 = null;
+			closeServer(trackerServer, storageServer);
 		}
 	}
 
@@ -85,27 +69,29 @@ public class FastdfsStorageService implements StorageService, InitializingBean {
 			}
 			storageServer = trackerClient.getStoreStorage(trackerServer, groupName);
 			storageClient1 = new StorageClient1(trackerServer, storageServer);
-			int result = storageClient1.delete_file1(fileId);
-			return result;
+			return storageClient1.delete_file1(fileId);
 		} catch (Exception ex) {
 			logger.error("Delete fail", ex);
 			return 1;
 		} finally {
-			if (storageServer != null) {
-				try {
-					storageServer.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
+			closeServer(trackerServer, storageServer);
+		}
+	}
+
+	private void closeServer(TrackerServer trackerServer, StorageServer storageServer) {
+		if (storageServer != null) {
+			try {
+				storageServer.close();
+			} catch (IOException e) {
+				logger.error("关闭storage server失败{}",e);
 			}
-			if (trackerServer != null) {
-				try {
-					trackerServer.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
+		}
+		if (trackerServer != null) {
+			try {
+				trackerServer.close();
+			} catch (IOException e) {
+				logger.error("关闭track server失败{}",e);
 			}
-			storageClient1 = null;
 		}
 	}
 
