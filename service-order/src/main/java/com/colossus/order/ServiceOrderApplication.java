@@ -13,7 +13,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @SpringBootApplication(scanBasePackages ={"com.colossus"} )
 @EnableDiscoveryClient
 @EnableTransactionManagement
-@EnableFeignClients(basePackages = {"com.colossus.redis.service","com.colossus.member.client"})
+@EnableFeignClients(basePackages = {"com.colossus.redis.service"})
 @MapperScan(basePackages = "com.colossus.common.dao")
 public class ServiceOrderApplication {
 
