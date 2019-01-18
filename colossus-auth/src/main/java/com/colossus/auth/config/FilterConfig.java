@@ -18,7 +18,7 @@ import java.util.List;
 public class FilterConfig {
 
     @Bean
-    public FilterRegistrationBean UpdateUserFilterProxy( JwtAuthenticator jwtAuthenticator, JwtGenerator jwtGenerator){
+    public FilterRegistrationBean updateUserFilterProxy( JwtAuthenticator jwtAuthenticator, JwtGenerator jwtGenerator){
         ServiceAuthFilter serviceAuthFilter=new ServiceAuthFilter(jwtGenerator,jwtAuthenticator);
         FilterRegistrationBean registrationBean=new FilterRegistrationBean();
         registrationBean.setFilter(serviceAuthFilter);
