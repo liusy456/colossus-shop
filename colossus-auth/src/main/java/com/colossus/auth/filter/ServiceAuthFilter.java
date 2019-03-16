@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 /**
+ * 服务鉴权filter
  * @author Tlsy1
  * @since 2018-11-08 17:25
  **/

@@ -87,8 +87,7 @@ public class StringUtil extends StringUtils {
         String regEx = "<.+?>";
         Pattern p = Pattern.compile(regEx);
         Matcher m = p.matcher(html);
-        String s = m.replaceAll("");
-        return s;
+        return m.replaceAll("");
     }
 
     /**
@@ -148,7 +147,7 @@ public class StringUtil extends StringUtils {
         if (param == null) {
             return "";
         }
-        StringBuffer result = new StringBuffer();
+        StringBuilder result = new StringBuilder();
         int n = 0;
         char temp;
         boolean isCode = false; // 是不是HTML代码
@@ -627,6 +626,4 @@ public class StringUtil extends StringUtils {
             return defaultValue;
         }
     }
-
-
 }

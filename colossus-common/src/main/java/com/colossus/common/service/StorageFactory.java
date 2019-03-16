@@ -35,7 +35,6 @@ public class StorageFactory implements FactoryBean<StorageService> {
 		if (clazz == null) {
 			throw new RuntimeException("Unsupported storage type [" + type + "], valid are " + classMap.keySet());
 		}
-
 		StorageService bean = clazz.newInstance();
 		acbf.autowireBean(bean);
 		acbf.initializeBean(bean, bean.getClass().getSimpleName());

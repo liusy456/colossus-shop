@@ -8,6 +8,9 @@ import org.springframework.transaction.support.TransactionSynchronizationManager
 import javax.persistence.EntityManager;
 import java.io.Serializable;
 
+/**
+ * 多租户事务管理
+ */
 public class MultiTenantJpaTransactionManager  extends JpaTransactionManager{
 
 	private static final long serialVersionUID = 540073346739578316L;
