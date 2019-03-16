@@ -1,6 +1,9 @@
 ## colossus-shop
 [![Total lines](https://tokei.rs/b1/github/liusy456/colossus-shop?category=lines)](https://github.com/liusy456/colossus-shop)
-##### 基于spring-cloud的分布式商城项目qq：1326699189
+##### 基于spring-cloud的分布式商城项目
+注:本项目并不是一个完整的商城项目，只是一个分布式，微服务的练手项目
+只有一些基本功能和根据，目的是了解分布式和微服务开发。谢谢
+qq：1326699189
 
 ### 涉及技术
 * Spring Cloud
