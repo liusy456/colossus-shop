@@ -178,7 +178,7 @@
         <repository>
             <id>nexus-releases</id>
             <name>Releases Repository</name>
-            <url>http://localhost:8090/repository/maven-releases/</url>
+            <url>http://maven.colossus.vip/repository/maven-releases/</url>
             <releases>
                 <enabled>true</enabled>
                 <updatePolicy>daily</updatePolicy>
@@ -198,7 +198,7 @@
         <repository>
             <id>nexus-snapshots</id>
             <name>Snapshot Repository</name>
-            <url>http://localhost:8090/repository/maven-snapshots/</url>
+            <url>http://maven.colossus.vip/repository/maven-snapshots/</url>
             <snapshots>
                 <enabled>true</enabled>
                 <updatePolicy>daily</updatePolicy>
@@ -210,7 +210,7 @@
         <repository>
             <id>nexus-public</id>
             <name>internal Repository</name>
-            <url>http://localhost:8090/repository/maven-public/</url>
+            <url>http://maven.colossus.vip/repository/maven-public/</url>
             <releases>
                 <enabled>true</enabled>
                 <updatePolicy>daily</updatePolicy>
@@ -261,7 +261,7 @@
         <pluginRepository>
             <id>nexus-releases</id>
             <name>Releases Repository</name>
-            <url>http://localhost:8090/repository/maven-releases/</url>
+            <url>http://maven.colossus.vip/repository/maven-releases/</url>
             <releases>
                 <enabled>true</enabled>
                 <updatePolicy>daily</updatePolicy>
@@ -271,7 +271,7 @@
         <pluginRepository>
             <id>nexus-snapshots</id>
             <name>Snapshot Repository</name>
-            <url>http://localhost:8090/repository/maven-snapshots/</url>
+            <url>http://maven.colossus.vip/repository/maven-snapshots/</url>
             <snapshots>
                 <enabled>true</enabled>
                 <updatePolicy>daily</updatePolicy>
@@ -283,7 +283,7 @@
         <pluginRepository>
             <id>nexus-public</id>
             <name>internal Repository</name>
-            <url>http://localhost:8090/repository/maven-public/</url>
+            <url>http://maven.colossus.vip/repository/maven-public/</url>
             <releases>
                 <enabled>true</enabled>
                 <updatePolicy>daily</updatePolicy>
