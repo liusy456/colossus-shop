@@ -6,6 +6,8 @@ import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.common.HybridBinarizer;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -19,6 +21,8 @@ import java.util.Hashtable;
  * @date 2017/4/19  16:27
  */
 public class ZxingUtil {
+
+    private static final Logger logger = LoggerFactory.getLogger(ZxingUtil.class);
     /**
      * 条形码编码
      *
@@ -66,7 +70,7 @@ public class ZxingUtil {
             result = new MultiFormatReader().decode(bitmap, null);
             return result.getText();
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("{}",e);
         }
         return null;
     }
@@ -93,7 +97,7 @@ public class ZxingUtil {
                     .writeToFile(bitMatrix, "png", new File(imgPath));
 
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("{}",e);
         }
     }
 
@@ -120,7 +124,7 @@ public class ZxingUtil {
             result = new MultiFormatReader().decode(bitmap, hints);
             return result.getText();
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("{}",e);
         }
         return null;
     }

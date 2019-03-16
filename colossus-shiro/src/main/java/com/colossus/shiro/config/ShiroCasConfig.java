@@ -191,7 +191,8 @@ public class ShiroCasConfig {
         definition.addPathDefinition("/logout", "logout");
         //微服务接口不做登录认证，只做服务鉴权
         definition.addPathDefinition("/client/**", "anon");
-        definition.addPathDefinition("/**", "member");
+        //默认都要登录
+        definition.addPathDefinition("/**", "auth");
         //definition.addPathDefinition("/api/v1/ebay-call-back/**", "anon");
         return definition;
     }

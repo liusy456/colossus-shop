@@ -20,9 +20,7 @@ public class IDUtils {
 		Random random = new Random();
 		int end3 = random.nextInt(999);
 		//如果不足三位前面补0
-		String str = millis + String.format("%03d", end3);
-		
-		return str;
+		return millis + String.format("%03d", end3);
 	}
 	
 	/**
@@ -75,18 +73,5 @@ public class IDUtils {
 		String str = String.format("%04d", end4);
 
 		return data + millis + str;
-	}
-
-
-	public static void main(String[] args) {
-		//for(int i=0;i< 100;i++)
-		//System.out.println(genOrderId());
-
-		//String s = "1";
-		//s = "0000" + s;
-		//s = s.substring(s.length() - 4, s.length());
-		//System.out.println(s);
-
-		System.out.println(genOrderItemId());
 	}
 }

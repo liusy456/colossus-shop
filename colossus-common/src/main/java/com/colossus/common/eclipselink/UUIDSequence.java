@@ -11,7 +11,6 @@ import java.util.Vector;
 
 /**
 * 自定义主键生成策略
-* @author chendilin
 * @date 2016年8月8日
 */
 public class UUIDSequence extends Sequence implements SessionCustomizer{

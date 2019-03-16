@@ -22,16 +22,12 @@ import java.util.Set;
  * 针对API的统一异常处理拦截器<br>
  * 
  * 将所有API异常封装成JSON对象返回客户端,并通过HTTP状态码表示服务出现异常
- * 
- * @author huzq
  * @date 2016-8-19
  */
 @ControllerAdvice(annotations = RestController.class)
 public class ApiExceptionHandler {
 
 	private static final Logger logger = LoggerFactory.getLogger(ApiExceptionHandler.class);
-
-
 	/**
 	 * 处理服务异常
 	 *
