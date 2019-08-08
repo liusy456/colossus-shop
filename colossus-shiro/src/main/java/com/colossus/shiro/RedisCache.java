@@ -1,7 +1,7 @@
 package com.colossus.shiro;
 
 import com.alibaba.fastjson.JSON;
-import com.tembin.common.utils.SerializableUtil;
+import com.colossus.common.utils.SerializableUtil;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.shiro.cache.Cache;
 import org.apache.shiro.cache.CacheException;

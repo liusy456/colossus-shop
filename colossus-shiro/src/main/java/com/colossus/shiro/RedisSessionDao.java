@@ -1,7 +1,7 @@
 package com.colossus.shiro;
 
 
-import com.tembin.common.utils.SerializableUtil;
+import com.colossus.common.utils.SerializableUtil;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.session.UnknownSessionException;
 import org.apache.shiro.session.mgt.eis.AbstractSessionDAO;
