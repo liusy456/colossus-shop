@@ -2,6 +2,9 @@ package com.colossus.common.utils;
 
 
 import com.colossus.common.code_enum.RequestMethodEnum;
+import com.colossus.common.exception.ServiceException;
+import org.apache.commons.beanutils.BeanUtilsBean;
+import org.apache.commons.beanutils.PropertyUtilsBean;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.auth.AuthScope;
@@ -17,9 +20,13 @@ import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 
+import java.beans.PropertyDescriptor;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -137,5 +144,24 @@ public class AppUtil {
         byte[] salt = HashUtil.generateSalt(8);
         byte[] hashPassword = HashUtil.sha1(plain.getBytes(),salt,1024);
         return StringUtil.encodeHex(salt)+StringUtil.encodeHex(hashPassword);
+    }
+
+    public static Map<String, Object> entityToMap(Object object) {
+        Map<String, Object> map = new HashMap();
+        for (Field field : object.getClass().getDeclaredFields()){
+            try {
+                BeanUtilsBean beanUtilsBean = BeanUtilsBean.getInstance();
+                PropertyUtilsBean propertyUtilsBean = beanUtilsBean.getPropertyUtils();
+                PropertyDescriptor origDescriptors = propertyUtilsBean.getPropertyDescriptor(object, field.getName());
+                Method readMethod = propertyUtilsBean.getReadMethod(origDescriptors);
+                boolean flag = field.isAccessible();
+                field.setAccessible(true);
+                map.put(field.getName(), readMethod.invoke(object));
+                field.setAccessible(flag);
+            } catch (Exception e) {
+                throw new ServiceException(e);
+            }
+        }
+        return map;
     }
 }
