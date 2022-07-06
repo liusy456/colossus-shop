@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <properties>
-        <shiro-version>1.4.0</shiro-version>
+        <shiro-version>1.9.1</shiro-version>
     </properties>
 
     <artifactId>colossus-shiro</artifactId>
